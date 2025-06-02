@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="틴토 올나잇 파티 초대장 - 7월 25일 금요일 밤, 함께 즐기는 특별한 밤">
-    <meta name="theme-color" content="#8A2BE2">
+    <meta name="theme-color" content="#8B5A2B">
     <meta property="og:title" content="틴토 올나잇 파티 초대장">
     <meta property="og:description" content="7월 25일 금요일 밤, 틴토에서 열리는 올나잇 파티에 초대합니다!">
     <meta property="og:image" content="https://img.spacecloud.kr/z/ZtJ3HkYpn3OYZe5fPIzuXx6JQXANvLOGiS3y16dQtbs.jpg">
@@ -12,16 +12,16 @@
     <style>
         body {
             font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background-color: white;
+            background-color: #F8F3E9;
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #3A2A1A;
         }
         .container {
             max-width: 100%;
             margin: 0 auto;
             padding: 20px;
-            border: 3px solid #8A2BE2;
+            border: 3px solid #8B5A2B;
             position: relative;
             overflow: hidden;
         }
@@ -31,8 +31,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: linear-gradient(#8A2BE280 1px, transparent 1px), 
-                              linear-gradient(90deg, #8A2BE280 1px, transparent 1px);
+            background-image: linear-gradient(#8B5A2B20 1px, transparent 1px), 
+                              linear-gradient(90deg, #8B5A2B20 1px, transparent 1px);
             background-size: 20px 20px;
             z-index: -1;
             opacity: 0.2;
@@ -44,17 +44,26 @@
         }
         .title {
             font-size: 2.5rem;
-            color: #8A2BE2;
+            color: #8B5A2B;
             margin-bottom: 10px;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(138, 43, 226, 0.3);
+            text-shadow: 2px 2px 4px rgba(139, 90, 43, 0.3);
             animation: heartbeat 2s infinite;
+        }
+        .english-title {
+            font-size: 1.5rem;
+            color: #A67C52;
+            margin-bottom: 15px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
         }
         .subtitle {
             font-size: 1.2rem;
-            color: #333;
+            color: #3A2A1A;
             margin-bottom: 20px;
-            background: linear-gradient(90deg, #8A2BE2, #FF69B4, #8A2BE2);
+            background: linear-gradient(90deg, #8B5A2B, #D2B48C, #8B5A2B);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
@@ -65,25 +74,26 @@
             width: 100%;
             border-radius: 10px;
             margin-bottom: 20px;
-            border: 2px solid #8A2BE2;
+            border: 2px solid #8B5A2B;
             transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         .venue-image:hover {
             transform: scale(1.02);
         }
         .details {
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(248, 243, 233, 0.8);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
-            border: 2px dashed #8A2BE2;
+            border: 2px dashed #8B5A2B;
             animation: slideIn 1s ease-in-out;
         }
         .details h2 {
-            color: #8A2BE2;
+            color: #8B5A2B;
             font-size: 1.5rem;
             margin-bottom: 15px;
-            border-bottom: 2px solid #8A2BE2;
+            border-bottom: 2px solid #8B5A2B;
             padding-bottom: 5px;
         }
         .details p {
@@ -91,23 +101,19 @@
             font-size: 1.1rem;
         }
         .details i {
-            color: #8A2BE2;
+            color: #8B5A2B;
             margin-right: 8px;
         }
         .event-box {
-            background-color: #F8F0FF;
+            background-color: #F3EBE0;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            border-left: 5px solid #8A2BE2;
+            border-left: 5px solid #8B5A2B;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             animation: slideIn 0.8s ease-in-out;
             animation-fill-mode: both;
-        }
-        .event-box:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
         }
         .event-box:nth-child(1) {
             animation-delay: 0.2s;
@@ -118,16 +124,20 @@
         .event-box:nth-child(3) {
             animation-delay: 0.6s;
         }
+        .event-box:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(139, 90, 43, 0.2);
+        }
         .event-box h3 {
-            color: #8A2BE2;
+            color: #8B5A2B;
             margin-top: 0;
         }
         .event-box p {
             font-size: 1rem;
         }
         .popup-window {
-            background-color: #F0F8FF;
-            border: 2px solid #8A2BE2;
+            background-color: #F3EBE0;
+            border: 2px solid #8B5A2B;
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 20px;
@@ -135,7 +145,7 @@
             animation: bounce 2s infinite;
         }
         .popup-header {
-            background-color: #8A2BE2;
+            background-color: #8B5A2B;
             color: white;
             padding: 5px 10px;
             border-radius: 5px 5px 0 0;
@@ -160,7 +170,7 @@
             animation: pulse 2s infinite;
         }
         .rsvp-button {
-            background-color: #8A2BE2;
+            background-color: #8B5A2B;
             color: white;
             border: none;
             padding: 15px 30px;
@@ -169,11 +179,28 @@
             cursor: pointer;
             transition: all 0.3s;
             font-weight: bold;
-            box-shadow: 0 4px 6px rgba(138, 43, 226, 0.3);
+            box-shadow: 0 4px 6px rgba(139, 90, 43, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         .rsvp-button:hover {
-            background-color: #7B1FA2;
+            background-color: #A0522D;
             transform: scale(1.05);
+        }
+        .rsvp-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: transform 0.5s;
+            pointer-events: none;
+        }
+        .rsvp-button:hover::after {
+            transform: rotate(30deg) translate(50%, 50%);
         }
         .footer {
             text-align: center;
@@ -185,7 +212,7 @@
             display: inline-block;
             margin: 5px;
             padding: 10px;
-            background: linear-gradient(135deg, #FF9AFF, #8A2BE2);
+            background: linear-gradient(135deg, #D2B48C, #8B5A2B);
             border-radius: 8px;
             color: white;
             font-weight: bold;
@@ -214,13 +241,13 @@
             transition: all 0.3s ease;
         }
         .modal-content {
-            background-color: white;
+            background-color: #F8F3E9;
             margin: 10% auto;
             padding: 20px;
             width: 80%;
             max-width: 500px;
             border-radius: 10px;
-            border: 3px solid #8A2BE2;
+            border: 3px solid #8B5A2B;
             position: relative;
         }
         .close-btn {
@@ -228,7 +255,7 @@
             top: 10px;
             right: 15px;
             font-size: 1.5rem;
-            color: #8A2BE2;
+            color: #8B5A2B;
             cursor: pointer;
         }
         .form-group {
@@ -237,18 +264,19 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
-            color: #8A2BE2;
+            color: #8B5A2B;
             font-weight: bold;
         }
         .form-group input, .form-group select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #8A2BE2;
+            border: 1px solid #8B5A2B;
             border-radius: 5px;
             font-size: 1rem;
+            background-color: #F3EBE0;
         }
         .submit-btn {
-            background-color: #8A2BE2;
+            background-color: #8B5A2B;
             color: white;
             border: none;
             padding: 12px 20px;
@@ -260,7 +288,7 @@
             transition: background-color 0.3s;
         }
         .submit-btn:hover {
-            background-color: #7B1FA2;
+            background-color: #A0522D;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -282,7 +310,7 @@
         .countdown {
             text-align: center;
             margin: 20px 0;
-            color: #8A2BE2;
+            color: #8B5A2B;
             font-size: 1.2rem;
             font-weight: bold;
         }
@@ -293,7 +321,7 @@
             margin-top: 10px;
         }
         .countdown-item {
-            background-color: #8A2BE2;
+            background-color: #8B5A2B;
             color: white;
             padding: 10px;
             border-radius: 5px;
@@ -312,7 +340,8 @@
             margin-bottom: 20px;
             border-radius: 10px;
             overflow: hidden;
-            border: 2px solid #8A2BE2;
+            border: 2px solid #8B5A2B;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         .map-container iframe {
             width: 100%;
@@ -329,7 +358,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: #8A2BE2;
+            background-color: #8B5A2B;
             color: white;
             display: flex;
             align-items: center;
@@ -339,38 +368,93 @@
         }
         .share-button:hover {
             transform: scale(1.1);
-            background-color: #7B1FA2;
+            background-color: #A0522D;
         }
         
         /* 이미지 갤러리 */
         .gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 15px;
+            margin: 25px 0;
             justify-content: center;
         }
         .gallery-item {
-            width: calc(33.33% - 10px);
-            border-radius: 8px;
+            width: 100%;
+            border-radius: 10px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 4px 8px rgba(138, 43, 226, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 15px rgba(139, 90, 43, 0.3);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            margin-bottom: 20px;
         }
         .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(139, 90, 43, 0.4);
         }
         .gallery-item img {
             width: 100%;
-            height: 150px;
+            height: 300px;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.7s ease;
         }
         .gallery-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05);
+        }
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 20px;
+            color: white;
+            font-style: italic;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+        
+        .quote-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            font-style: italic;
+            color: #5D4037;
+            position: relative;
+        }
+        .quote-container::before,
+        .quote-container::after {
+            content: '"';
+            font-size: 60px;
+            font-family: Georgia, serif;
+            color: rgba(139, 90, 43, 0.2);
+            position: absolute;
+        }
+        .quote-container::before {
+            top: -10px;
+            left: 10px;
+        }
+        .quote-container::after {
+            bottom: -40px;
+            right: 10px;
+            transform: rotate(180deg);
+        }
+        .quote {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .quote-author {
+            font-size: 0.9rem;
+            color: #8B5A2B;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         /* 와인 아이콘 */
@@ -390,7 +474,7 @@
         }
         .wine-icon i {
             font-size: 2rem;
-            color: #8A2BE2;
+            color: #8B5A2B;
             margin-bottom: 5px;
         }
         .wine-icon:nth-child(2) {
@@ -437,6 +521,9 @@
             .title {
                 font-size: 2rem;
             }
+            .english-title {
+                font-size: 1.5rem;
+            }
             .subtitle {
                 font-size: 1rem;
             }
@@ -479,6 +566,24 @@
                 font-size: 0.8rem;
                 padding: 8px;
             }
+            .quote {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            .quote-container::before,
+            .quote-container::after {
+                font-size: 40px;
+            }
+            .gallery-item {
+                margin-bottom: 15px;
+            }
+            .gallery-item img {
+                height: 250px;
+            }
+            .gallery-caption {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -488,6 +593,9 @@
             }
             .title {
                 font-size: 1.8rem;
+            }
+            .english-title {
+                font-size: 1.5rem;
             }
             .subtitle {
                 font-size: 0.9rem;
@@ -521,20 +629,47 @@
                 padding: 12px 25px;
                 font-size: 1rem;
             }
+            .quote {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            .quote-author {
+                font-size: 0.8rem;
+            }
+            .gallery-item img {
+                height: 200px;
+            }
+            .gallery-caption {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+            .wine-icon i {
+                font-size: 1.7rem;
+            }
+            .wine-icon span {
+                font-size: 0.7rem;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="grid-pattern"></div>
         <div class="header">
             <div class="title">틴토 올나잇 파티</div>
+            <div class="english-title">TINTO ALL NIGHT SOIRÉE</div>
             <div class="subtitle">금요일 밤, 일상을 벗어나 새로운 경험을 함께 해요</div>
         </div>
 
         <img src="https://img.spacecloud.kr/z/ZtJ3HkYpn3OYZe5fPIzuXx6JQXANvLOGiS3y16dQtbs.jpg" alt="틴토 공간 이미지" class="venue-image">
+        
+        <div class="quote-container">
+            <p class="quote">"In the rhythm of life, there are moments that call for celebration - moments when hearts align, spirits soar, and memories are etched into the fabric of time."</p>
+            <p class="quote-author">- The Night We Remember</p>
+        </div>
 
         <div class="countdown">
             <p>파티까지 남은 시간</p>
@@ -558,15 +693,12 @@
             </div>
         </div>
 
-        <div class="gallery" style="animation: fadeIn 1.5s ease-in-out">
+        <div class="gallery">
             <div class="gallery-item">
                 <img src="rooftop.png" alt="루프탑 공간" style="animation: rotateIn 1s ease-in-out">
-            </div>
-            <div class="gallery-item">
-                <img src="2.png" alt="실내 공간" style="animation: rotateIn 1s ease-in-out 0.3s both">
-            </div>
-            <div class="gallery-item">
-                <img src="3.png" alt="바 공간" style="animation: rotateIn 1s ease-in-out 0.6s both">
+                <div class="gallery-caption">
+                    "Under the stars, we find ourselves - where the city lights meet the infinity of the night sky."
+                </div>
             </div>
         </div>
 
@@ -606,6 +738,20 @@
             <p><i class="fas fa-money-bill-wave"></i> <strong>참가비:</strong> 5만원 (장소 대여 및 음식/음료 비용)</p>
         </div>
 
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="2.png" alt="실내 공간" style="animation: rotateIn 1s ease-in-out 0.3s both">
+                <div class="gallery-caption">
+                    "A sanctuary of warmth and connection, where conversations bloom and friendships deepen."
+                </div>
+            </div>
+        </div>
+        
+        <div class="quote-container">
+            <p class="quote">"Each glass raised is a testament to the beauty of shared moments, each conversation a thread in the tapestry of our collective story."</p>
+            <p class="quote-author">- Whispers of Celebration</p>
+        </div>
+
         <div class="map-container">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.3575989648487!2d126.92313687640413!3d37.52531782746204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f3a66c69bab%3A0xb43459a27e60947a!2z7JeQ65287Iqk7YyM7J287IqkIOyXreyLnO2DgO2ZmOyepQ!5e0!3m2!1sko!2skr!4v1687532183633!5m2!1sko!2skr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
@@ -615,6 +761,15 @@
             <div class="popup-content">
                 <strong>마니또 이벤트</strong> <span class="emoji">🎭</span><br>
                 입장 시 각자의 마니또(비밀 친구)와 닉네임이 부여됩니다. 누가 나의 마니또인지, 누가 어떤 닉네임인지 파티 내내 추리해보세요!
+            </div>
+        </div>
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="3.png" alt="바 공간" style="animation: rotateIn 1s ease-in-out 0.6s both">
+                <div class="gallery-caption">
+                    "Where libations flow and spirits elevate, we find the perfect alchemy of connection and joy."
+                </div>
             </div>
         </div>
 
@@ -628,6 +783,11 @@
             <p>음악 스톱, 거짓말 탐지기, 미션 수행하기 등 다양한 게임으로 서로를 더 알아가는 시간을 가져보세요. 우승자에게는 특별한 상품이 준비되어 있습니다!</p>
         </div>
 
+        <div class="quote-container">
+            <p class="quote">"There's a certain magic in the air when kindred spirits gather, a harmonious vibration that transcends the ordinary and touches the sublime."</p>
+            <p class="quote-author">- Nocturnal Reflections</p>
+        </div>
+
         <div class="event-box" onclick="showEventDetails('랜덤 토픽 대화', '매 시간마다 다음과 같은 토픽이 제시됩니다:<br>- 내 인생의 가장 행복했던 순간<br>- 10년 후의 나는 어떤 모습일까?<br>- 내가 꼭 가보고 싶은 여행지<br>- 나를 변화시킨 한 가지 경험<br>- 내가 가장 좋아하는 음식과 이유')">
             <h3><i class="fas fa-comments"></i> 랜덤 토픽 대화</h3>
             <p>매 시간마다 랜덤으로 선정되는 토픽으로 새로운 사람들과 대화를 나눠보세요. 평소에 나누기 어려웠던 대화 주제로 더 깊이 소통할 수 있는 기회입니다.</p>
@@ -636,6 +796,11 @@
         <div class="rsvp">
             <button class="rsvp-button" onclick="openModal()">참가 신청하기</button>
             <p style="margin-top: 10px; font-size: 0.9rem;">* 참가비는 현장에서 수납합니다</p>
+        </div>
+        
+        <div class="quote-container">
+            <p class="quote">"Let us embrace this night with open hearts and curious minds, for in our togetherness we discover not just each other, but the infinite possibilities that exist when souls connect in celebration."</p>
+            <p class="quote-author">- The Art of Gathering</p>
         </div>
 
         <div class="share-buttons">
@@ -663,7 +828,7 @@
     <div id="rsvpModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 style="color: #8A2BE2; text-align: center; margin-bottom: 20px;">파티 참가 신청</h2>
+            <h2 style="color: #8B5A2B; text-align: center; margin-bottom: 20px;">파티 참가 신청</h2>
             <form id="rsvpForm">
                 <div class="form-group">
                     <label for="name">이름</label>
