@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>YELLOW BULL - 문화 플랫폼</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #8B1538 0%, #A0522D 20%, #8B4513 40%, #CD853F 60%, #D2691E 80%, #B22222 100%);
+            color: #F5F5DC;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+
+        /* 패턴 오버레이 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="pattern" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="rgba(245,222,179,0.05)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23pattern)"/></svg>');
+            pointer-events: none;
+            z-index: 1;
+            will-change: transform;
+        }
+
+        .container {
+            min-height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* 헤더 */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 60px;
+            z-index: 1000;
+            background: rgba(139, 21, 56, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(245, 222, 179, 0.1);
+            transition: all 0.6s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 300;
+            color: #F5DEB3;
+            letter-spacing: 8px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '月';
+            position: absolute;
+            top: -10px;
+            right: -30px;
+            font-size: 1.2rem;
+            color: rgba(245, 222, 179, 0.6);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .menu-btn {
+            padding: 12px 25px;
+            border: 1px solid rgba(245, 222, 179, 0.3);
+            background: rgba(245, 222, 179, 0.05);
+            color: #F5DEB3;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .menu-btn:hover {
+            background: rgba(245, 222, 179, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* 메인 콘텐츠 */
+        .main-content {
+            padding-top: 120px;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 40px;
+            padding: 120px 60px 60px;
+            min-height: 100vh;
+        }
+
+        /* 왼쪽 사이드바 */
+        .sidebar-left {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .chinese-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 4rem;
+            font-weight: 300;
+            color: rgba(245, 222, 179, 0.8);
+            letter-spacing: 10px;
+            line-height: 1.2;
+            margin-bottom: 40px;
+        }
+
+        .decorative-pattern {
+            width: 100%;
+            height: 300px;
+            background: url('texture1.jpg') center/cover;
+            filter: sepia(100%) saturate(150%) hue-rotate(350deg) contrast(1.2);
+            opacity: 0.3;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .decorative-pattern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(139, 21, 56, 0.4) 50%, transparent 70%);
+        }
+
+        /* 중앙 콘텐츠 */
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 600px;
+            background: linear-gradient(rgba(139, 21, 56, 0.7), rgba(160, 82, 45, 0.8)), url('movie-camera.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 0;
+            overflow: hidden;
+            filter: sepia(20%) saturate(1.1) contrast(1.1);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(245, 222, 179, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 70% 70%, rgba(139, 21, 56, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: grain 15s steps(8) infinite;
+        }
+
+        .hero-content {
+            z-index: 10;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 6rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #F5DEB3;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
+            letter-spacing: 12px;
+            line-height: 0.9;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: rgba(245, 245, 220, 0.9);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 50px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .cta-button {
+            padding: 20px 40px;
+            background: rgba(245, 222, 179, 0.1);
+            border: 1px solid #F5DEB3;
+            color: #F5DEB3;
+            font-size: 1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            font-family: 'Times New Roman', serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: rgba(245, 222, 179, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(135deg, #8B1538, #A0522D);
+            border-color: transparent;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .service-card {
+            background: rgba(139, 21, 56, 0.2);
+            padding: 60px 40px;
+            border-radius: 0;
+            border: 1px solid rgba(245, 222, 179, 0.2);
+            backdrop-filter: blur(15px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('movie-set.jpg') center/cover;
+            opacity: 0.1;
+            filter: sepia(50%) saturate(120%) hue-rotate(350deg);
+            transition: all 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 0.2;
+            transform: scale(1.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(245, 222, 179, 0.4);
+            background: rgba(139, 21, 56, 0.3);
+        }
+
+        .service-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .service-title {
+            font-size: 2.5rem;
+            color: #F5DEB3;
+            margin-bottom: 25px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .service-description {
+            font-size: 1.1rem;
+            color: rgba(245, 245, 220, 0.9);
+            line-height: 1.7;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        .service-link {
+            color: #F5DEB3;
+            text-decoration: none;
+            font-weight: 300;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(245, 222, 179, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover {
+            border-bottom-color: #F5DEB3;
+        }
+
+        /* 오른쪽 사이드바 */
+        .sidebar-right {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .image-collage {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .collage-item {
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            filter: sepia(30%) saturate(120%) hue-rotate(350deg) contrast(1.1);
+            transition: all 0.6s ease;
+        }
+
+        .collage-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            filter: sepia(20%) saturate(130%) hue-rotate(350deg) contrast(1.2);
+        }
+
+        .collage-item:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            background: url('director-chair.jpg') center/cover;
+            margin-left: auto;
+        }
+
+        .collage-item:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: url('film-projector.jpg') center/cover;
+            margin: 20px auto;
+            transform: rotate(-10deg);
+        }
+
+        .collage-item:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            background: url('cinema2.jpg') center/cover;
+            margin-right: auto;
+        }
+
+        .page-counter {
+            background: rgba(245, 222, 179, 0.9);
+            color: #8B1538;
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-top: auto;
+        }
+
+        /* 푸터 */
+        .footer {
+            text-align: center;
+            padding: 80px 60px;
+            background: rgba(139, 21, 56, 0.3);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(245, 222, 179, 0.1);
+        }
+
+        .footer-content h3 {
+            font-size: 2.5rem;
+            color: #F5DEB3;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
+        .footer-content p {
+            font-size: 1.2rem;
+            color: rgba(245, 245, 220, 0.8);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* 모바일 반응형 */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 60px;
+                padding: 100px 40px 40px;
+            }
+
+            .sidebar-left,
+            .sidebar-right {
+                order: 2;
+            }
+
+            .center-content {
+                order: 1;
+            }
+
+            .chinese-text {
+                writing-mode: horizontal-tb;
+                text-orientation: mixed;
+                font-size: 3rem;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+                letter-spacing: 8px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px 30px;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+                letter-spacing: 4px;
+            }
+
+            .main-content {
+                padding: 80px 20px 20px;
+                gap: 40px;
+            }
+
+            .hero-section {
+                height: 400px;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+                letter-spacing: 4px;
+                margin-bottom: 20px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+                letter-spacing: 2px;
+                margin-bottom: 30px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+
+            .service-card {
+                padding: 40px 30px;
+            }
+
+            .service-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .service-description {
+                font-size: 1rem;
+            }
+
+            .chinese-text {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+            }
+
+            .image-collage {
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .collage-item {
+                transform: none !important;
+            }
+
+            .collage-item:nth-child(1),
+            .collage-item:nth-child(2),
+            .collage-item:nth-child(3) {
+                width: 80px;
+                height: 80px;
+                margin: 0;
+            }
+
+            .footer {
+                padding: 60px 20px;
+            }
+
+            .footer-content h3 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .footer-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 1px;
+            }
+
+            .service-title {
+                font-size: 1.7rem;
+                letter-spacing: 1px;
+            }
+
+            .chinese-text {
+                font-size: 2rem;
+            }
+        }
+
+        /* 애니메이션 효과 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-2%, -2%); }
+            20% { transform: translate(-4%, 2%); }
+            30% { transform: translate(2%, -4%); }
+            40% { transform: translate(-2%, 6%); }
+            50% { transform: translate(-4%, 2%); }
+            60% { transform: translate(6%, 0%); }
+            70% { transform: translate(0%, 4%); }
+            80% { transform: translate(-6%, 0%); }
+            90% { transform: translate(4%, 2%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <header class="header">
+            <nav class="nav">
+                <div class="logo">YELLOW BULL</div>
+                <button class="menu-btn">MENU</button>
+            </nav>
+        </header>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <!-- 왼쪽 사이드바 -->
+            <aside class="sidebar-left">
+                <div class="chinese-text fade-in">
+                    農<br>
+                    曆<br>
+                    新<br>
+                    年
+                </div>
+                <div class="decorative-pattern fade-in"></div>
+            </aside>
+
+            <!-- 중앙 콘텐츠 -->
+            <section class="center-content">
+                <!-- 히어로 섹션 -->
+                <div class="hero-section fade-in">
+                    <div class="hero-content">
+                        <h1 class="hero-title">YELLOW BULL</h1>
+                        <p class="hero-subtitle">문화와 창작의 새로운 패러다임</p>
+                        <div class="cta-buttons">
+                            <a href="talk-salon.html" class="cta-button primary">CINEMA TALK</a>
+                            <a href="movie-analysis.html" class="cta-button">MOVIE ANALYZER</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 서비스 그리드 -->
+                <div class="services-grid">
+                    <div class="service-card fade-in" onclick="location.href='talk-salon.html'">
+                        <div class="service-content">
+                            <h3 class="service-title">Cinema Talk Salon</h3>
+                            <p class="service-description">
+                                현직 연출자와 함께하는 깊이 있는 영화 토크. 
+                                와인과 타파스를 곁들인 특별한 문화 경험을 만나보세요.
+                            </p>
+                            <a href="talk-salon.html" class="service-link">자세히 보기 →</a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in" onclick="location.href='movie-analysis.html'">
+                        <div class="service-content">
+                            <h3 class="service-title">Movie Taste Analyzer</h3>
+                            <p class="service-description">
+                                AI 기반 영화 취향 분석과 개인 맞춤형 추천. 
+                                당신만의 영화 DNA를 발견해보세요.
+                            </p>
+                            <a href="movie-analysis.html" class="service-link">분석 시작하기 →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 오른쪽 사이드바 -->
+            <aside class="sidebar-right">
+                <div class="image-collage fade-in">
+                    <div class="collage-item"></div>
+                    <div class="collage-item"></div>
+                    <div class="collage-item"></div>
+                </div>
+                <div class="page-counter fade-in">1/4</div>
+            </aside>
+        </main>
+
+        <!-- 푸터 -->
+        <footer class="footer">
+            <div class="footer-content fade-in">
+                <h3>문화의 경계를 넘나드는 플랫폼</h3>
+                <p>
+                    YELLOW BULL은 전통과 현대, 동양과 서양의 문화적 경계를 허무는 
+                    새로운 형태의 문화 플랫폼입니다. 깊이 있는 대화와 혁신적인 기술이 만나는 곳.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 페이드인 애니메이션
+        function initAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = '0.2s';
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // 스크롤 시차 효과
+        function handleParallax() {
+            let ticking = false;
+            
+            function updateParallax() {
+                const scrolled = window.pageYOffset;
+                const heroSection = document.querySelector('.hero-section');
+                const decorativePattern = document.querySelector('.decorative-pattern');
+                
+                if (heroSection) {
+                    heroSection.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+                
+                if (decorativePattern) {
+                    decorativePattern.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+                
+                ticking = false;
+            }
+            
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            }
+            
+            window.addEventListener('scroll', requestTick, { passive: true });
+        }
+
+        // 메뉴 버튼 기능
+        function initMenu() {
+            const menuBtn = document.querySelector('.menu-btn');
+            menuBtn.addEventListener('click', function() {
+                alert('메뉴 기능은 곧 구현됩니다!');
+            });
+        }
+
+        // 터치 및 마우스 이벤트
+        function initInteractions() {
+            // 서비스 카드 터치 효과
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.style.transform = 'translateY(-5px) scale(0.98)';
+                }, { passive: true });
+                
+                card.addEventListener('touchend', function() {
+                    this.style.transform = 'translateY(-10px) scale(1)';
+                }, { passive: true });
+            });
+
+            // 콜라주 아이템 클릭 효과
+            document.querySelectorAll('.collage-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    this.style.animation = 'float 0.6s ease';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 600);
+                });
+            });
+        }
+
+        // 초기화
+        window.addEventListener('load', function() {
+            initAnimations();
+            handleParallax();
+            initMenu();
+            initInteractions();
+            
+            // 로고 애니메이션
+            const logo = document.querySelector('.logo');
+            logo.style.opacity = '0';
+            logo.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                logo.style.transition = 'all 1s ease';
+                logo.style.opacity = '1';
+                logo.style.transform = 'translateY(0)';
+            }, 500);
+        });
+
+        // 디바이스 방향 변경 대응
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                location.reload();
+            }, 100);
+        });
+    </script>
+</body>
+</html> 
