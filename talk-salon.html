@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>CINEMA TALK SALON - YELLOW BULL</title>
+    <title>Cinema Talk Salon - CINE'MO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -11,18 +15,55 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            --accent-color: #667eea;
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
         }
 
         body {
-            font-family: 'Times New Roman', serif;
-            background: #1A0A0A;
-            color: #F5F5DC;
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-gradient);
+            color: var(--text-primary);
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .container {
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
         }
 
         /* Header */
@@ -31,983 +72,688 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(26, 10, 10, 0.95);
-            padding: 25px 40px;
             z-index: 1000;
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(245, 222, 179, 0.1);
-            transition: all 0.3s ease;
-            will-change: transform;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 20px 0;
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         .logo {
-            font-size: 1.6rem;
-            font-weight: 300;
-            color: #F5DEB3;
-            letter-spacing: 4px;
-            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
         }
 
         .back-btn {
-            color: #F5DEB3;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 300;
-            letter-spacing: 2px;
+            font-weight: 500;
             transition: all 0.3s ease;
-            padding: 10px 20px;
-            border: 1px solid rgba(245, 222, 179, 0.3);
-            background: rgba(245, 222, 179, 0.05);
-            touch-action: manipulation;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-size: 14px;
         }
 
-        .back-btn:active {
-            color: #FFF;
-            background: rgba(245, 222, 179, 0.15);
-            transform: translateY(1px);
+        .back-btn:hover {
+            background: var(--glass-border);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 100px;
+            min-height: 100vh;
         }
 
         /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(139, 21, 56, 0.85), rgba(45, 7, 16, 0.9)), url('director-workshop.jpg') center/cover;
+        .hero-section {
+            position: relative;
+            height: 70vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative;
-            filter: sepia(20%) saturate(1.1) contrast(1.05);
-            will-change: transform;
+            background: linear-gradient(rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)), url('director-workshop.jpg') center/cover;
+            border-radius: 0;
+            overflow: hidden;
+            margin-bottom: 80px;
         }
 
-        .hero::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 30%, rgba(245, 222, 179, 0.03) 1px, transparent 1px),
-                radial-gradient(circle at 70% 70%, rgba(139, 21, 56, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: grain 12s steps(10) infinite;
-            will-change: transform;
-        }
-
-        @keyframes grain {
-            0%, 100% { transform: translate(0, 0); }
-            10% { transform: translate(-5%, -5%); }
-            20% { transform: translate(-10%, 5%); }
-            30% { transform: translate(5%, -10%); }
-            40% { transform: translate(-5%, 15%); }
-            50% { transform: translate(-10%, 5%); }
-            60% { transform: translate(15%, 0%); }
-            70% { transform: translate(0%, 10%); }
-            80% { transform: translate(-15%, 0%); }
-            90% { transform: translate(10%, 5%); }
+            background: var(--glass-bg);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
         }
 
         .hero-content {
-            z-index: 10;
             position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease-out 0.5s forwards;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 40px;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
         }
 
-        .hero-content h1 {
-            font-size: 4.5rem;
-            margin-bottom: 30px;
-            color: #F5DEB3;
-            text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
-            letter-spacing: 6px;
-            line-height: 0.9;
+        .hero-subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: 20px;
             font-weight: 300;
-            will-change: transform;
         }
 
-        .hero-content .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 50px;
-            color: #F5F5DC;
-            opacity: 0.9;
-            font-weight: 300;
-            letter-spacing: 2px;
+        .hero-description {
+            font-size: 16px;
+            color: var(--text-muted);
             line-height: 1.6;
-        }
-
-        .cta-button {
-            padding: 20px 45px;
-            background: rgba(245, 222, 179, 0.08);
-            border: 1px solid #F5DEB3;
-            color: #F5DEB3;
-            font-size: 1rem;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border-radius: 0;
-            backdrop-filter: blur(10px);
-            font-family: 'Times New Roman', serif;
-            touch-action: manipulation;
-            will-change: transform, background-color;
-        }
-
-        .cta-button:active {
-            background: rgba(245, 222, 179, 0.2);
-            color: #FFF;
-            transform: translateY(2px);
-        }
-
-        /* Content Sections */
-        .section {
-            padding: 100px 40px;
-            max-width: 1200px;
+            max-width: 600px;
             margin: 0 auto;
-            position: relative;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform, opacity;
         }
 
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* Section Styles */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
         }
 
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 1px;
-            height: 100px;
-            background: linear-gradient(to bottom, transparent, #8B1538, transparent);
-            transform: translateX(-50%);
-            opacity: 0;
-            animation: lineGrow 1s ease-out 0.5s forwards;
-        }
-
-        @keyframes lineGrow {
-            to {
-                opacity: 1;
-            }
-        }
-
-        .section h2 {
-            font-size: 3.5rem;
-            color: #F5DEB3;
-            margin-bottom: 50px;
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 40px;
             text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-weight: 300;
-            line-height: 1.1;
-            transform: translateY(30px);
-            opacity: 0;
-            transition: all 0.6s ease 0.2s;
-            will-change: transform, opacity;
+            color: var(--text-primary);
         }
 
-        .section.visible h2 {
-            transform: translateY(0);
-            opacity: 1;
+        .section-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 60px 40px;
+            box-shadow: var(--glass-shadow);
         }
 
-        .section-intro {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 80px;
-            color: rgba(245, 245, 220, 0.9);
+        .section-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-secondary);
             text-align: center;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 300;
-            letter-spacing: 1px;
-            transform: translateY(30px);
-            opacity: 0;
-            transition: all 0.6s ease 0.4s;
-            will-change: transform, opacity;
+            margin: 0 auto;
         }
 
-        .section.visible .section-intro {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Program Structure */
+        /* Program Grid */
         .program-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-bottom: 100px;
+            gap: 30px;
+            margin-top: 60px;
         }
 
         .program-card {
-            background: linear-gradient(135deg, rgba(139, 21, 56, 0.3), rgba(93, 15, 32, 0.2));
-            padding: 50px 40px;
-            border-radius: 0;
-            border: 1px solid rgba(245, 222, 179, 0.2);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(10px);
-            transform: translateY(50px);
-            opacity: 0;
-            will-change: transform, opacity;
-            touch-action: manipulation;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--glass-shadow);
         }
 
-        .program-card.visible {
-            transform: translateY(0);
-            opacity: 1;
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.4);
         }
 
-        .program-card:active {
-            transform: translateY(-3px) scale(0.98);
-            border-color: rgba(245, 222, 179, 0.5);
-            background: linear-gradient(135deg, rgba(139, 21, 56, 0.5), rgba(93, 15, 32, 0.4));
+        .program-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            text-align: center;
         }
 
-        .program-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #F5DEB3, transparent);
-            transform: translateX(-100%);
-            transition: transform 0.8s ease;
+        .program-duration {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 20px;
         }
 
-        .program-card:active::before {
-            transform: translateX(100%);
-        }
-
-        .card-title {
-            font-size: 1.8rem;
-            color: #F5DEB3;
-            margin-bottom: 25px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .card-content {
-            color: rgba(245, 245, 220, 0.9);
-            line-height: 1.7;
-            position: relative;
-            z-index: 2;
-            font-weight: 300;
-            letter-spacing: 0.5px;
+        .program-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 14px;
         }
 
         /* Timeline */
         .timeline {
-            background: rgba(139, 21, 56, 0.15);
-            padding: 80px 40px;
-            margin: 60px 0;
-            border-radius: 0;
-            border: 1px solid rgba(245, 222, 179, 0.1);
-            backdrop-filter: blur(10px);
+            position: relative;
+            margin: 80px 0;
         }
 
-        .timeline h3 {
-            color: #F5DEB3;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 60px;
-            font-weight: 300;
-            letter-spacing: 3px;
-            transform: translateY(30px);
-            opacity: 0;
-            transition: all 0.6s ease;
-            will-change: transform, opacity;
-        }
-
-        .timeline.visible h3 {
-            transform: translateY(0);
-            opacity: 1;
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--glass-border);
+            transform: translateX(-50%);
         }
 
         .timeline-item {
             display: flex;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
             padding: 30px;
-            background: rgba(245, 222, 179, 0.05);
-            border-radius: 0;
-            border-left: 3px solid #8B1538;
-            transition: all 0.4s ease;
-            transform: translateX(-30px);
-            opacity: 0;
-            will-change: transform, opacity;
-        }
-
-        .timeline-item.visible {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .timeline-item:active {
-            background: rgba(245, 222, 179, 0.1);
-            transform: translateX(5px);
+            width: 45%;
+            box-shadow: var(--glass-shadow);
         }
 
         .timeline-time {
-            font-size: 1.3rem;
-            color: #F5DEB3;
-            font-weight: 300;
-            min-width: 120px;
-            margin-right: 30px;
-            letter-spacing: 1px;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: inline-block;
         }
 
-        .timeline-content h4 {
-            color: #F5DEB3;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            font-weight: 300;
-            letter-spacing: 1px;
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
         }
 
-        .timeline-content p {
-            color: rgba(245, 245, 220, 0.9);
-            line-height: 1.7;
-            font-weight: 300;
-            letter-spacing: 0.5px;
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px var(--glass-bg);
         }
 
         /* Highlights */
         .highlights {
-            background: linear-gradient(135deg, rgba(139, 21, 56, 0.8), rgba(160, 82, 45, 0.6));
-            color: #F5F5DC;
-            padding: 80px 50px;
-            border-radius: 0;
             margin: 80px 0;
-            text-align: center;
-            position: relative;
-            border: 1px solid rgba(245, 222, 179, 0.2);
         }
 
-        .highlights::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 25% 25%, rgba(245, 222, 179, 0.05) 1px, transparent 1px),
-                radial-gradient(circle at 75% 75%, rgba(139, 21, 56, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
-        .highlights h3 {
-            font-size: 3rem;
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 3px;
-            position: relative;
-            z-index: 2;
-            transform: translateY(30px);
-            opacity: 0;
-            transition: all 0.6s ease;
-            will-change: transform, opacity;
-        }
-
-        .highlights.visible h3 {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .highlight-grid {
+        .highlights-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-            position: relative;
-            z-index: 2;
+            gap: 30px;
+            margin-top: 40px;
         }
 
         .highlight-item {
-            background: rgba(245, 222, 179, 0.1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
             padding: 40px 30px;
-            border-radius: 0;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(245, 222, 179, 0.2);
-            transition: all 0.4s ease;
-            transform: translateY(30px);
-            opacity: 0;
-            will-change: transform, opacity;
-            touch-action: manipulation;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--glass-shadow);
         }
 
-        .highlight-item.visible {
-            transform: translateY(0);
-            opacity: 1;
+        .highlight-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
         }
 
-        .highlight-item:active {
-            background: rgba(245, 222, 179, 0.2);
-            transform: translateY(-3px) scale(0.98);
-        }
-
-        .highlight-item h4 {
-            font-size: 1.6rem;
+        .highlight-icon {
+            font-size: 48px;
             margin-bottom: 20px;
-            color: #F5DEB3;
-            font-weight: 300;
-            letter-spacing: 1px;
+            display: block;
         }
 
-        .highlight-item p {
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            line-height: 1.6;
+        .highlight-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .highlight-description {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-size: 14px;
         }
 
         /* Footer CTA */
         .footer-cta {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 80px 40px;
             text-align: center;
-            padding: 100px 40px;
-            background: linear-gradient(135deg, rgba(139, 21, 56, 0.6), rgba(45, 7, 16, 0.8));
-            position: relative;
+            margin-top: 120px;
         }
 
-        .footer-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.4"/></svg>');
-            opacity: 0.1;
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 5vw, 42px);
+            margin-bottom: 24px;
+            color: var(--text-primary);
         }
 
-        .footer-cta h3 {
-            font-size: 3rem;
-            color: #F5DEB3;
+        .cta-description {
+            font-size: 18px;
+            color: var(--text-secondary);
             margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 3px;
-            position: relative;
-            z-index: 2;
-            transform: translateY(30px);
-            opacity: 0;
-            transition: all 0.6s ease;
-            will-change: transform, opacity;
-        }
-
-        .footer-cta.visible h3 {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .footer-cta p {
-            font-size: 1.2rem;
-            margin-bottom: 50px;
-            color: rgba(245, 245, 220, 0.9);
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 300;
-            letter-spacing: 1px;
-            line-height: 1.7;
-            position: relative;
-            z-index: 2;
-            transform: translateY(30px);
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 18px 48px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .brand-footer {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Animations */
+        .fade-in {
             opacity: 0;
-            transition: all 0.6s ease 0.2s;
-            will-change: transform, opacity;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .footer-cta.visible p {
-            transform: translateY(0);
+        .fade-in.visible {
             opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Responsive */
+        /* Mobile Optimization */
         @media (max-width: 768px) {
-            .header {
-                padding: 20px 20px;
+            .nav {
+                padding: 0 20px;
             }
 
-            .logo {
-                font-size: 1.3rem;
-                letter-spacing: 2px;
+            .hero-content {
+                padding: 0 20px;
             }
 
-            .back-btn {
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
-
-            .hero-content h1 {
-                font-size: 3rem;
-                letter-spacing: 3px;
-                margin-bottom: 25px;
-            }
-            
-            .hero-content .subtitle {
-                font-size: 1.1rem;
-                letter-spacing: 1px;
-                margin-bottom: 40px;
-            }
-
-            .cta-button {
-                padding: 18px 35px;
-                font-size: 0.9rem;
-                letter-spacing: 2px;
-            }
-            
             .section {
-                padding: 60px 20px;
+                padding: 0 20px;
             }
 
-            .section h2 {
-                font-size: 2.5rem;
-                letter-spacing: 2px;
-                margin-bottom: 40px;
-            }
-
-            .section-intro {
-                font-size: 1.1rem;
-                margin-bottom: 60px;
-            }
-            
-            .timeline-item {
-                flex-direction: column;
-                padding: 25px;
-            }
-            
-            .timeline-time {
-                margin-bottom: 15px;
-                margin-right: 0;
-                font-size: 1.2rem;
+            .section-content {
+                padding: 40px 20px;
             }
 
             .program-grid {
-                gap: 30px;
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .program-card {
-                padding: 40px 30px;
+            .timeline::before {
+                left: 20px;
             }
 
-            .timeline {
-                padding: 60px 20px;
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 40px;
             }
 
-            .timeline h3 {
-                font-size: 2.2rem;
-                margin-bottom: 40px;
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
-            .highlights {
-                padding: 60px 30px;
+            .timeline-content {
+                width: 100%;
             }
 
-            .highlights h3 {
-                font-size: 2.5rem;
-                margin-bottom: 30px;
+            .timeline-dot {
+                left: 20px;
             }
 
-            .highlight-grid {
-                gap: 30px;
+            .highlights-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
 
             .footer-cta {
-                padding: 80px 20px;
-            }
-
-            .footer-cta h3 {
-                font-size: 2.5rem;
-                margin-bottom: 30px;
-            }
-
-            .footer-cta p {
-                font-size: 1.1rem;
-                margin-bottom: 40px;
+                padding: 60px 20px;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-            }
-
-            .hero-content .subtitle {
-                font-size: 1rem;
-                letter-spacing: 1px;
-            }
-
-            .cta-button {
-                padding: 15px 30px;
-                font-size: 0.8rem;
-                letter-spacing: 1px;
-            }
-
-            .section {
-                padding: 40px 15px;
-            }
-
-            .section h2 {
-                font-size: 2rem;
-                letter-spacing: 1px;
-            }
-
-            .section-intro {
-                font-size: 1rem;
-            }
-
-            .program-card {
-                padding: 30px 20px;
-            }
-
-            .card-title {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
-            }
-
-            .timeline-time {
-                font-size: 1.1rem;
-            }
-
-            .timeline-content h4 {
-                font-size: 1.2rem;
-            }
-
-            .highlight-item {
-                padding: 30px 20px;
-            }
-
-            .highlight-item h4 {
-                font-size: 1.4rem;
-                margin-bottom: 15px;
-            }
-        }
-
-        /* 터치 디바이스 최적화 */
         @media (hover: none) and (pointer: coarse) {
             .program-card:hover,
-            .timeline-item:hover,
             .highlight-item:hover {
                 transform: none;
-                background: inherit;
+                box-shadow: var(--glass-shadow);
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">YELLOW BULL</div>
-            <a href="index.html" class="back-btn">← BACK TO MAIN</a>
-        </nav>
-    </header>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <nav class="nav">
+                <div class="logo">CINE'MO</div>
+                <a href="index.html" class="back-btn">← BACK TO MAIN</a>
+            </nav>
+        </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>CINEMA<br>TALK SALON</h1>
-            <p class="subtitle">연출자의 눈, 관객의 마음: 독립영화에서 길을 찾다</p>
-            <button class="cta-button">지금 신청하기</button>
-        </div>
-    </section>
-
-    <!-- Overview Section -->
-    <section class="section" data-section="overview">
-        <h2>Program Overview</h2>
-        <div class="section-intro">
-            와인과 타파스를 곁들인 마스터클래스형 토크살롱으로, 10년차 숲 PD와 함께하는 현장감 있는 영화 연출 이야기입니다. 
-            영화 없이 진행되는 프로그램으로, 연출자의 시선과 제작 경험에 집중된 스토리텔링 기반의 특별한 시간을 제공합니다.
-        </div>
-
-        <div class="program-grid">
-            <div class="program-card" data-card="0">
-                <h3 class="card-title">연출 구성</h3>
-                <div class="card-content">
-                    <p>"이 인물은 세상을 어떻게 바라볼까?"부터 시작하는 연출의 철학. 컷 분할, 조명, 사운드까지 모든 것이 하나의 관점에서 결정되는 과정을 들어봅니다.</p>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section fade-in">
+                <div class="hero-content">
+                    <h1 class="hero-title">Cinema Talk Salon</h1>
+                    <p class="hero-subtitle">연출자의 눈, 관객의 마음</p>
+                    <p class="hero-description">
+                        독립영화에서 길을 찾다. 현직 연출자와 함께하는 깊이 있는 대화의 시간
+                    </p>
                 </div>
-            </div>
+            </section>
+
+            <!-- Program Overview -->
+            <section class="section fade-in">
+                <h2 class="section-title">프로그램 개요</h2>
+                <div class="section-content">
+                    <p class="section-text">
+                        영화 없이 진행되는 특별한 토크살롱. 연출자의 시선과 제작 경험에 집중된 스토리텔링으로 
+                        와인과 타파스를 곁들인 마스터클래스형 문화 경험을 선사합니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Program Details -->
+            <section class="section">
+                <h2 class="section-title fade-in">프로그램 구성</h2>
+                <div class="program-grid">
+                    <div class="program-card fade-in">
+                        <div class="program-duration">15분</div>
+                        <h3 class="program-title">연출 구성</h3>
+                        <p class="program-description">
+                            이야기를 만들기 전, "이 인물은 세상을 어떻게 바라볼까?"부터 생각하는 연출의 관점. 
+                            컷 분할, 조명, 사운드까지 모든 것이 이 관점에서 결정되는 과정을 들어봅니다.
+                        </p>
+                    </div>
+                    <div class="program-card fade-in">
+                        <div class="program-duration">15분</div>
+                        <h3 class="program-title">연기 디렉팅</h3>
+                        <p class="program-description">
+                            관객이 '연기'가 아닌 '경험'처럼 느끼게 하는 방법. 배우의 진정한 감정을 이끌어내는 
+                            연출 기법과 현장에서의 실제 경험담을 공유합니다.
+                        </p>
+                    </div>
+                    <div class="program-card fade-in">
+                        <div class="program-duration">10분</div>
+                        <h3 class="program-title">예상 밖의 연출</h3>
+                        <p class="program-description">
+                            독립영화 현장의 예상치 못한 변수들. 제한된 조건에서 새로운 영화 문법을 발명해야 하는 
+                            연출자의 창의적 해결책들을 만나보세요.
+                        </p>
+                    </div>
+                    <div class="program-card fade-in">
+                        <div class="program-duration">10분</div>
+                        <h3 class="program-title">관객 입장 연출</h3>
+                        <p class="program-description">
+                            "이 장면에서 관객은 지금 어디를 보고 있을까?" 관객의 시선과 리듬을 고려한 
+                            연출 철학과 '보여주기'가 아닌 '느끼게 하기'의 예술을 탐구합니다.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline -->
+            <section class="section">
+                <h2 class="section-title fade-in">타임라인</h2>
+                <div class="timeline">
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-time">19:00 - 19:30</div>
+                            <h3 class="timeline-title">입장 & 웰컴 드링크</h3>
+                            <p class="timeline-description">
+                                참가자 입장 및 네트워킹. 와인과 간단한 타파스로 편안한 분위기 조성
+                            </p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-time">19:30 - 20:20</div>
+                            <h3 class="timeline-title">메인 토크</h3>
+                            <p class="timeline-description">
+                                4가지 주제로 구성된 연출자의 경험담과 철학 공유 (50분)
+                            </p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-time">20:20 - 21:10</div>
+                            <h3 class="timeline-title">질의응답 & 네트워킹</h3>
+                            <p class="timeline-description">
+                                자유로운 질의응답과 참가자들 간의 네트워킹 타임
+                            </p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Highlights -->
+            <section class="section highlights">
+                <h2 class="section-title fade-in">특별한 경험</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-item fade-in">
+                        <span class="highlight-icon">🎬</span>
+                        <h3 class="highlight-title">10년차 현직 연출자</h3>
+                        <p class="highlight-description">
+                            다수의 독립영화 연출 및 제작 경험을 가진 전문가의 생생한 이야기
+                        </p>
+                    </div>
+                    <div class="highlight-item fade-in">
+                        <span class="highlight-icon">🍷</span>
+                        <h3 class="highlight-title">와인 & 타파스</h3>
+                        <p class="highlight-description">
+                            엄선된 와인과 정성스럽게 준비된 타파스로 품격 있는 문화 경험
+                        </p>
+                    </div>
+                    <div class="highlight-item fade-in">
+                        <span class="highlight-icon">💬</span>
+                        <h3 class="highlight-title">소규모 인터랙션</h3>
+                        <p class="highlight-description">
+                            제한된 인원으로 진행되는 밀도 높은 대화와 개인적인 질의응답 기회
+                        </p>
+                    </div>
+                    <div class="highlight-item fade-in">
+                        <span class="highlight-icon">🎭</span>
+                        <h3 class="highlight-title">영화 없는 토크</h3>
+                        <p class="highlight-description">
+                            영화 상영 없이 오직 대화와 스토리텔링에 집중하는 특별한 형식
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer CTA -->
+        <footer class="footer-cta">
+            <h2 class="cta-title fade-in">지금 신청하세요</h2>
+            <p class="cta-description fade-in">
+                제한된 좌석으로 진행되는 특별한 경험. 
+                Cinema Talk Salon에서 영화와 창작의 새로운 시각을 발견해보세요.
+            </p>
+            <a href="#" class="cta-button fade-in">신청하기</a>
             
-            <div class="program-card" data-card="1">
-                <h3 class="card-title">연기 디렉팅</h3>
-                <div class="card-content">
-                    <p>관객이 '연기'가 아닌 '경험'처럼 느끼게 하는 방법. 배우의 진짜 감정을 끌어내기 위한 현장의 노하우와 실제 사례를 공유합니다.</p>
-                </div>
+            <div class="brand-footer fade-in">
+                © 2025 주식회사 까사씨네마(Casa Cinema). All rights reserved.
             </div>
-            
-            <div class="program-card" data-card="2">
-                <h3 class="card-title">예상 밖의 연출</h3>
-                <div class="card-content">
-                    <p>독립영화 현장의 예측 불가능한 상황들. 제약된 조건에서 새로운 영화 문법을 발명해야 하는 연출자의 창의적 해결책들을 만나보세요.</p>
-                </div>
-            </div>
-            
-            <div class="program-card" data-card="3">
-                <h3 class="card-title">관객 입장 연출</h3>
-                <div class="card-content">
-                    <p>"이 장면에서 관객은 지금 어디를 보고 있을까?" 관객의 시선과 리듬을 고려한 연출 철학과 실제 적용 사례를 들어봅니다.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Timeline -->
-    <section class="section" data-section="timeline">
-        <div class="timeline">
-            <h3>프로그램 타임라인 (총 100분)</h3>
-            
-            <div class="timeline-item" data-timeline="0">
-                <div class="timeline-time">50분</div>
-                <div class="timeline-content">
-                    <h4>1부: 강연 - "연출자의 시선"</h4>
-                    <p>연출 구성, 연기 디렉팅, 예상 밖의 연출, 관객 입장 연출 등 4개 주제로 구성된 심도 있는 강연</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item" data-timeline="1">
-                <div class="timeline-time">50분</div>
-                <div class="timeline-content">
-                    <h4>2부: 질의응답 & 네트워킹</h4>
-                    <p>와인과 타파스를 곁들인 자유로운 질의응답 및 네트워킹 시간. 창작자와 관객이 자연스럽게 교류할 수 있는 캐주얼한 대화의 장</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Highlights -->
-    <section class="highlights" data-section="highlights">
-        <h3>특별한 경험</h3>
-        <div class="highlight-grid">
-            <div class="highlight-item" data-highlight="0">
-                <h4>현장 스토리</h4>
-                <p>시나리오 이후의 이야기를 처음 듣는 시간</p>
-            </div>
-            <div class="highlight-item" data-highlight="1">
-                <h4>고밀도 토크</h4>
-                <p>영화 없이도 연출자의 세계를 상상할 수 있는 깊이 있는 대화</p>
-            </div>
-            <div class="highlight-item" data-highlight="2">
-                <h4>직접 소통</h4>
-                <p>소규모 대화 중심으로 창작자와 직접 이야기할 수 있는 기회</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer CTA -->
-    <section class="footer-cta" data-section="footer">
-        <h3>지금 신청하세요</h3>
-        <p>한정된 좌석으로 운영되는 특별한 토크살롱에 참여하여, 영화 연출의 깊이 있는 세계를 경험해보세요.</p>
-        <button class="cta-button">신청하기</button>
-    </section>
+        </footer>
+    </div>
 
     <script>
-        // 인터섹션 옵저버를 이용한 스크롤 애니메이션
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // 햅틱 피드백 (모바일)
-                    if (navigator.vibrate && window.innerWidth <= 768) {
-                        navigator.vibrate(30);
-                    }
-                    
-                    // 카드들 순차 애니메이션
-                    if (entry.target.querySelector('.program-card')) {
-                        animateCards('.program-card', entry.target);
-                    }
-                    
-                    if (entry.target.querySelector('.timeline-item')) {
-                        animateCards('.timeline-item', entry.target);
-                    }
-                    
-                    if (entry.target.querySelector('.highlight-item')) {
-                        animateCards('.highlight-item', entry.target);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // 애니메이션할 요소들 관찰
-        document.querySelectorAll('.section, .timeline, .highlights, .footer-cta').forEach(section => {
-            observer.observe(section);
-        });
-
-        // 카드 순차 애니메이션
-        function animateCards(selector, container) {
-            const cards = container.querySelectorAll(selector);
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('visible');
-                }, index * 150);
-            });
-        }
-
-        // CTA 버튼 클릭 이벤트
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function() {
-                // 햅틱 피드백
-                if (navigator.vibrate) {
-                    navigator.vibrate(50);
-                }
-                
-                // 버튼 애니메이션
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                    alert('곧 신청 페이지가 오픈됩니다!');
-                }, 150);
-            });
-        });
-
-        // 스크롤 기반 시차 효과
-        let ticking = false;
-        
-        function updateParallax() {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            const header = document.querySelector('.header');
-            
-            if (hero) {
-                const rate = Math.min(scrolled * 0.3, 100);
-                hero.style.transform = `translateY(${rate}px)`;
-                hero.style.filter = `brightness(${1 - rate * 0.001}) sepia(${20 + rate * 0.1}%)`;
-            }
-            
-            // 헤더 배경 투명도 조절
-            if (header) {
-                const opacity = Math.min(scrolled / 100, 0.98);
-                header.style.background = `rgba(26, 10, 10, ${opacity})`;
-            }
-            
-            ticking = false;
-        }
-        
-        function requestTick() {
-            if (!ticking) {
-                requestAnimationFrame(updateParallax);
-                ticking = true;
-            }
-        }
-        
-        window.addEventListener('scroll', requestTick, { passive: true });
-
-        // 터치 기반 인터랙션
-        let touchStartY = 0;
-        let touchStartTime = 0;
-
-        document.addEventListener('touchstart', function(e) {
-            touchStartY = e.touches[0].clientY;
-            touchStartTime = Date.now();
-        }, { passive: true });
-
-        document.addEventListener('touchend', function(e) {
-            const touchEndY = e.changedTouches[0].clientY;
-            const touchEndTime = Date.now();
-            const deltaY = touchStartY - touchEndY;
-            const deltaTime = touchEndTime - touchStartTime;
-            
-            // 빠른 스와이프 감지
-            if (Math.abs(deltaY) > 50 && deltaTime < 300) {
-                const velocity = Math.abs(deltaY) / deltaTime;
-                
-                if (velocity > 0.5) {
-                    // 스크롤 관성 효과
-                    const sections = document.querySelectorAll('.section, .hero');
-                    sections.forEach(section => {
-                        section.style.transform = `translateY(${deltaY > 0 ? -5 : 5}px)`;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
                         setTimeout(() => {
-                            section.style.transform = '';
-                        }, 200);
+                            entry.target.classList.add('visible');
+                        }, index * 100); // Staggered animation
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Parallax effect for hero section
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const heroSection = document.querySelector('.hero-section');
+                if (heroSection) {
+                    heroSection.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+
+            // Haptic feedback for touch devices
+            if ('vibrate' in navigator) {
+                document.querySelectorAll('.program-card, .highlight-item, .cta-button').forEach(element => {
+                    element.addEventListener('touchstart', () => {
+                        navigator.vibrate(10);
                     });
-                }
+                });
             }
-        }, { passive: true });
 
-        // 디바이스 방향 변경 처리
-        window.addEventListener('orientationchange', function() {
-            setTimeout(() => {
-                // 레이아웃 재계산
-                window.scrollTo(0, window.pageYOffset + 1);
-                window.scrollTo(0, window.pageYOffset - 1);
-            }, 100);
-        });
+            // Smooth scroll for timeline items
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'translateX(0)';
+                            }, index * 200);
+                        }
+                    });
+                }, { threshold: 0.2 });
 
-        // 로드 시 초기 애니메이션
-        window.addEventListener('load', function() {
-            // 헤더 페이드인
-            const header = document.querySelector('.header');
-            header.style.opacity = '0';
-            header.style.transform = 'translateY(-20px)';
-            
-            setTimeout(() => {
-                header.style.transition = 'all 0.6s ease';
-                header.style.opacity = '1';
-                header.style.transform = 'translateY(0)';
-            }, 300);
-            
-            // 성능 최적화
-            document.body.style.willChange = 'auto';
-        });
-
-        // 성능 최적화: will-change 속성 관리
-        const performanceObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.willChange = 'transform, opacity';
+                item.style.opacity = '0';
+                if (index % 2 === 0) {
+                    item.style.transform = 'translateX(-50px)';
                 } else {
-                    entry.target.style.willChange = 'auto';
+                    item.style.transform = 'translateX(50px)';
                 }
-            });
-        });
-
-        document.querySelectorAll('.program-card, .timeline-item, .highlight-item').forEach(el => {
-            performanceObserver.observe(el);
-        });
-
-        // 마우스 이벤트 (데스크톱용)
-        if (window.matchMedia("(hover: hover)").matches) {
-            document.querySelectorAll('.program-card, .timeline-item, .highlight-item').forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                    this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
-                });
+                item.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 
-                item.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                    this.style.boxShadow = '';
-                });
+                observer.observe(item);
             });
-        }
+        });
     </script>
 </body>
 </html> 

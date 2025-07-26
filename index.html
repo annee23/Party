@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>YELLOW BULL - 문화 플랫폼</title>
+    <title>CINE'MO - Casa Cinema</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -11,22 +15,28 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            --accent-color: #667eea;
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
         }
 
         body {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-gradient);
+            color: var(--text-primary);
             overflow-x: hidden;
-            background: linear-gradient(135deg, #8B1538 0%, #A0522D 20%, #8B4513 40%, #CD853F 60%, #D2691E 80%, #B22222 100%);
-            color: #F5F5DC;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
             position: relative;
         }
 
-        /* 패턴 오버레이 */
         body::before {
             content: '';
             position: fixed;
@@ -35,238 +45,159 @@
             width: 100%;
             height: 100%;
             background: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="pattern" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="rgba(245,222,179,0.05)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23pattern)"/></svg>');
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
             pointer-events: none;
-            z-index: 1;
-            will-change: transform;
+            z-index: -1;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
         }
 
         .container {
             min-height: 100vh;
             position: relative;
-            z-index: 10;
+            z-index: 1;
         }
 
-        /* 헤더 */
+        /* Header */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            padding: 30px 60px;
             z-index: 1000;
-            background: rgba(139, 21, 56, 0.1);
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(245, 222, 179, 0.1);
-            transition: all 0.6s ease;
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         .logo {
-            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
             font-weight: 300;
-            color: #F5DEB3;
-            letter-spacing: 8px;
-            position: relative;
-        }
-
-        .logo::after {
-            content: '月';
-            position: absolute;
-            top: -10px;
-            right: -30px;
-            font-size: 1.2rem;
-            color: rgba(245, 222, 179, 0.6);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            letter-spacing: 0.1em;
+            margin-top: -5px;
         }
 
         .menu-btn {
-            padding: 12px 25px;
-            border: 1px solid rgba(245, 222, 179, 0.3);
-            background: rgba(245, 222, 179, 0.05);
-            color: #F5DEB3;
-            font-size: 0.9rem;
-            font-weight: 300;
-            letter-spacing: 2px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.4s ease;
-            text-transform: uppercase;
-            font-family: 'Times New Roman', serif;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .menu-btn:hover {
-            background: rgba(245, 222, 179, 0.15);
+            background: var(--glass-border);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
-        /* 메인 콘텐츠 */
+        /* Main Content */
         .main-content {
             padding-top: 120px;
-            display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 40px;
-            padding: 120px 60px 60px;
             min-height: 100vh;
-        }
-
-        /* 왼쪽 사이드바 */
-        .sidebar-left {
             display: flex;
             flex-direction: column;
-            gap: 30px;
         }
 
-        .chinese-text {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            font-size: 4rem;
-            font-weight: 300;
-            color: rgba(245, 222, 179, 0.8);
-            letter-spacing: 10px;
-            line-height: 1.2;
-            margin-bottom: 40px;
-        }
-
-        .decorative-pattern {
-            width: 100%;
-            height: 300px;
-            background: url('texture1.jpg') center/cover;
-            filter: sepia(100%) saturate(150%) hue-rotate(350deg) contrast(1.2);
-            opacity: 0.3;
-            border-radius: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .decorative-pattern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(139, 21, 56, 0.4) 50%, transparent 70%);
-        }
-
-        /* 중앙 콘텐츠 */
-        .center-content {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-        }
-
+        /* Hero Section */
         .hero-section {
-            position: relative;
-            height: 600px;
-            background: linear-gradient(rgba(139, 21, 56, 0.7), rgba(160, 82, 45, 0.8)), url('movie-camera.jpg') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             text-align: center;
-            border-radius: 0;
-            overflow: hidden;
-            filter: sepia(20%) saturate(1.1) contrast(1.1);
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 30%, rgba(245, 222, 179, 0.1) 1px, transparent 1px),
-                radial-gradient(circle at 70% 70%, rgba(139, 21, 56, 0.1) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: grain 15s steps(8) infinite;
-        }
-
-        .hero-content {
-            z-index: 10;
-            position: relative;
+            padding: 80px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .hero-title {
-            font-size: 6rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: #F5DEB3;
-            text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
-            letter-spacing: 12px;
-            line-height: 0.9;
-            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
         }
 
         .hero-subtitle {
-            font-size: 1.4rem;
-            color: rgba(245, 245, 220, 0.9);
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
             font-weight: 300;
-            letter-spacing: 3px;
-            margin-bottom: 50px;
+            letter-spacing: 0.02em;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
+        .hero-description {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
         }
 
-        .cta-button {
-            padding: 20px 40px;
-            background: rgba(245, 222, 179, 0.1);
-            border: 1px solid #F5DEB3;
-            color: #F5DEB3;
-            font-size: 1rem;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            cursor: pointer;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(10px);
-            font-family: 'Times New Roman', serif;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            background: rgba(245, 222, 179, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        .cta-button.primary {
-            background: linear-gradient(135deg, #8B1538, #A0522D);
-            border-color: transparent;
-        }
-
+        /* Services Grid */
         .services-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         .service-card {
-            background: rgba(139, 21, 56, 0.2);
-            padding: 60px 40px;
-            border-radius: 0;
-            border: 1px solid rgba(245, 222, 179, 0.2);
-            backdrop-filter: blur(15px);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
+            box-shadow: var(--glass-shadow);
         }
 
         .service-card::before {
@@ -276,514 +207,523 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('movie-set.jpg') center/cover;
-            opacity: 0.1;
-            filter: sepia(50%) saturate(120%) hue-rotate(350deg);
-            transition: all 0.6s ease;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 24px;
         }
 
         .service-card:hover::before {
-            opacity: 0.2;
-            transform: scale(1.05);
+            opacity: 0.1;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(245, 222, 179, 0.4);
-            background: rgba(139, 21, 56, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .service-content {
             position: relative;
-            z-index: 10;
+            z-index: 2;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 24px;
+            background: var(--primary-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
         }
 
         .service-title {
-            font-size: 2.5rem;
-            color: #F5DEB3;
-            margin-bottom: 25px;
-            font-weight: 300;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
         }
 
         .service-description {
-            font-size: 1.1rem;
-            color: rgba(245, 245, 220, 0.9);
-            line-height: 1.7;
-            font-weight: 300;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-size: 15px;
         }
 
         .service-link {
-            color: #F5DEB3;
+            color: var(--accent-color);
             text-decoration: none;
-            font-weight: 300;
-            letter-spacing: 2px;
-            border-bottom: 1px solid rgba(245, 222, 179, 0.3);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             transition: all 0.3s ease;
         }
 
         .service-link:hover {
-            border-bottom-color: #F5DEB3;
+            gap: 12px;
+            color: var(--text-primary);
         }
 
-        /* 오른쪽 사이드바 */
-        .sidebar-right {
-            display: flex;
-            flex-direction: column;
+        /* Features Section */
+        .features-section {
+            padding: 120px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--text-primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .image-collage {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .collage-item {
-            position: relative;
-            border-radius: 50%;
-            overflow: hidden;
-            filter: sepia(30%) saturate(120%) hue-rotate(350deg) contrast(1.1);
-            transition: all 0.6s ease;
-        }
-
-        .collage-item:hover {
-            transform: scale(1.05) rotate(2deg);
-            filter: sepia(20%) saturate(130%) hue-rotate(350deg) contrast(1.2);
-        }
-
-        .collage-item:nth-child(1) {
-            width: 120px;
-            height: 120px;
-            background: url('director-chair.jpg') center/cover;
-            margin-left: auto;
-        }
-
-        .collage-item:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            background: url('film-projector.jpg') center/cover;
-            margin: 20px auto;
-            transform: rotate(-10deg);
-        }
-
-        .collage-item:nth-child(3) {
-            width: 100px;
-            height: 100px;
-            background: url('cinema2.jpg') center/cover;
-            margin-right: auto;
-        }
-
-        .page-counter {
-            background: rgba(245, 222, 179, 0.9);
-            color: #8B1538;
-            padding: 20px;
+        .feature-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
             text-align: center;
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-            margin-top: auto;
+            transition: all 0.3s ease;
+            box-shadow: var(--glass-shadow);
         }
 
-        /* 푸터 */
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Footer */
         .footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 60px 40px 40px;
+            margin-top: 120px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
-            padding: 80px 60px;
-            background: rgba(139, 21, 56, 0.3);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(245, 222, 179, 0.1);
         }
 
-        .footer-content h3 {
-            font-size: 2.5rem;
-            color: #F5DEB3;
-            margin-bottom: 30px;
-            font-weight: 300;
-            letter-spacing: 4px;
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
         }
 
-        .footer-content p {
-            font-size: 1.2rem;
-            color: rgba(245, 245, 220, 0.8);
+        .footer-description {
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto 40px;
-            line-height: 1.7;
-            font-weight: 300;
-            letter-spacing: 1px;
+            line-height: 1.6;
         }
 
-        /* 모바일 반응형 */
-        @media (max-width: 1024px) {
-            .main-content {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-                gap: 60px;
-                padding: 100px 40px 40px;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 20px;
             }
 
-            .sidebar-left,
-            .sidebar-right {
-                order: 2;
-            }
-
-            .center-content {
-                order: 1;
-            }
-
-            .chinese-text {
-                writing-mode: horizontal-tb;
-                text-orientation: mixed;
-                font-size: 3rem;
-                text-align: center;
-            }
-
-            .hero-title {
-                font-size: 4rem;
-                letter-spacing: 8px;
+            .logo {
+                font-size: 24px;
             }
 
             .services-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 20px 30px;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-                letter-spacing: 4px;
-            }
-
-            .main-content {
-                padding: 80px 20px 20px;
-                gap: 40px;
-            }
-
-            .hero-section {
-                height: 400px;
-            }
-
-            .hero-title {
-                font-size: 3rem;
-                letter-spacing: 4px;
-                margin-bottom: 20px;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-                letter-spacing: 2px;
-                margin-bottom: 30px;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
                 gap: 20px;
-            }
-
-            .cta-button {
-                padding: 15px 30px;
-                font-size: 0.9rem;
-                letter-spacing: 2px;
+                padding: 0 20px;
             }
 
             .service-card {
-                padding: 40px 30px;
+                padding: 30px 20px;
+                border-radius: 20px;
             }
 
-            .service-title {
-                font-size: 2rem;
-                letter-spacing: 2px;
-            }
-
-            .service-description {
-                font-size: 1rem;
-            }
-
-            .chinese-text {
-                font-size: 2.5rem;
-                margin-bottom: 30px;
-            }
-
-            .image-collage {
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .collage-item {
-                transform: none !important;
-            }
-
-            .collage-item:nth-child(1),
-            .collage-item:nth-child(2),
-            .collage-item:nth-child(3) {
-                width: 80px;
-                height: 80px;
-                margin: 0;
-            }
-
-            .footer {
+            .hero-section {
                 padding: 60px 20px;
             }
 
-            .footer-content h3 {
-                font-size: 2rem;
-                letter-spacing: 2px;
+            .features-section {
+                padding: 80px 20px;
             }
 
-            .footer-content p {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .hero-subtitle {
-                font-size: 1rem;
-                letter-spacing: 1px;
+            .footer {
+                padding: 40px 20px 30px;
             }
 
-            .service-title {
-                font-size: 1.7rem;
-                letter-spacing: 1px;
+            .footer-links {
+                flex-direction: column;
+                gap: 20px;
             }
 
-            .chinese-text {
-                font-size: 2rem;
+            .floating-element {
+                display: none;
             }
         }
 
-        /* 애니메이션 효과 */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        @media (hover: none) and (pointer: coarse) {
+            .service-card:hover::before {
+                opacity: 0;
             }
-        }
-
-        @keyframes grain {
-            0%, 100% { transform: translate(0, 0); }
-            10% { transform: translate(-2%, -2%); }
-            20% { transform: translate(-4%, 2%); }
-            30% { transform: translate(2%, -4%); }
-            40% { transform: translate(-2%, 6%); }
-            50% { transform: translate(-4%, 2%); }
-            60% { transform: translate(6%, 0%); }
-            70% { transform: translate(0%, 4%); }
-            80% { transform: translate(-6%, 0%); }
-            90% { transform: translate(4%, 2%); }
+            
+            .service-card:hover {
+                transform: none;
+                box-shadow: var(--glass-shadow);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 헤더 -->
-        <header class="header">
+        <!-- Floating Elements -->
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+
+        <!-- Header -->
+        <header class="header" id="header">
             <nav class="nav">
-                <div class="logo">YELLOW BULL</div>
+                <div>
+                    <div class="logo">CINE'MO</div>
+                    <div class="brand-subtitle">BY CASA CINEMA</div>
+                </div>
                 <button class="menu-btn">MENU</button>
             </nav>
         </header>
 
-        <!-- 메인 콘텐츠 -->
+        <!-- Main Content -->
         <main class="main-content">
-            <!-- 왼쪽 사이드바 -->
-            <aside class="sidebar-left">
-                <div class="chinese-text fade-in">
-                    農<br>
-                    曆<br>
-                    新<br>
-                    年
-                </div>
-                <div class="decorative-pattern fade-in"></div>
-            </aside>
+            <!-- Hero Section -->
+            <section class="hero-section fade-in">
+                <h1 class="hero-title">CINE'MO</h1>
+                <p class="hero-subtitle">Cinema & Emotion</p>
+                <p class="hero-description">
+                    영화와 감정이 만나는 새로운 문화 플랫폼. 깊이 있는 대화와 혁신적인 기술로 
+                    당신의 영화 경험을 완전히 새롭게 정의합니다.
+                </p>
+            </section>
 
-            <!-- 중앙 콘텐츠 -->
-            <section class="center-content">
-                <!-- 히어로 섹션 -->
-                <div class="hero-section fade-in">
-                    <div class="hero-content">
-                        <h1 class="hero-title">YELLOW BULL</h1>
-                        <p class="hero-subtitle">문화와 창작의 새로운 패러다임</p>
-                        <div class="cta-buttons">
-                            <a href="talk-salon.html" class="cta-button primary">CINEMA TALK</a>
-                            <a href="movie-analysis.html" class="cta-button">MOVIE ANALYZER</a>
-                        </div>
+            <!-- Services Grid -->
+            <section class="services-grid">
+                <div class="service-card fade-in" onclick="navigateToPage('talk-salon.html')">
+                    <div class="service-content">
+                        <div class="service-icon">🎭</div>
+                        <h3 class="service-title">Cinema Talk Salon</h3>
+                        <p class="service-description">
+                            현직 연출자와 함께하는 깊이 있는 영화 토크.
+                            와인과 타파스를 곁들인 특별한 문화 경험을 만나보세요.
+                        </p>
+                        <a href="talk-salon.html" class="service-link">자세히 보기 →</a>
                     </div>
                 </div>
 
-                <!-- 서비스 그리드 -->
-                <div class="services-grid">
-                    <div class="service-card fade-in" onclick="location.href='talk-salon.html'">
-                        <div class="service-content">
-                            <h3 class="service-title">Cinema Talk Salon</h3>
-                            <p class="service-description">
-                                현직 연출자와 함께하는 깊이 있는 영화 토크. 
-                                와인과 타파스를 곁들인 특별한 문화 경험을 만나보세요.
-                            </p>
-                            <a href="talk-salon.html" class="service-link">자세히 보기 →</a>
-                        </div>
-                    </div>
-
-                    <div class="service-card fade-in" onclick="location.href='movie-analysis.html'">
-                        <div class="service-content">
-                            <h3 class="service-title">Movie Taste Analyzer</h3>
-                            <p class="service-description">
-                                AI 기반 영화 취향 분석과 개인 맞춤형 추천. 
-                                당신만의 영화 DNA를 발견해보세요.
-                            </p>
-                            <a href="movie-analysis.html" class="service-link">분석 시작하기 →</a>
-                        </div>
+                <div class="service-card fade-in" onclick="navigateToPage('movie-analysis.html')">
+                    <div class="service-content">
+                        <div class="service-icon">🎬</div>
+                        <h3 class="service-title">Movie Taste Analyzer</h3>
+                        <p class="service-description">
+                            AI 기반 영화 취향 분석과 개인 맞춤형 추천.
+                            당신만의 영화 DNA를 발견해보세요.
+                        </p>
+                        <a href="movie-analysis.html" class="service-link">분석 시작하기 →</a>
                     </div>
                 </div>
             </section>
 
-            <!-- 오른쪽 사이드바 -->
-            <aside class="sidebar-right">
-                <div class="image-collage fade-in">
-                    <div class="collage-item"></div>
-                    <div class="collage-item"></div>
-                    <div class="collage-item"></div>
+            <!-- Features Section -->
+            <section class="features-section">
+                <h2 class="features-title fade-in">Why CINE'MO?</h2>
+                <div class="features-grid">
+                    <div class="feature-item fade-in">
+                        <span class="feature-icon">✨</span>
+                        <h3 class="feature-title">Immersive Experience</h3>
+                        <p class="feature-description">몰입감 있는 UI/UX와 인터랙티브한 요소들로 새로운 차원의 영화 경험</p>
+                    </div>
+                    <div class="feature-item fade-in">
+                        <span class="feature-icon">🤝</span>
+                        <h3 class="feature-title">Expert Network</h3>
+                        <p class="feature-description">업계 최고의 연출자, 배우, 제작진들과의 직접적인 소통 기회</p>
+                    </div>
+                    <div class="feature-item fade-in">
+                        <span class="feature-icon">🧠</span>
+                        <h3 class="feature-title">AI-Powered Analysis</h3>
+                        <p class="feature-description">첨단 AI 기술을 활용한 정확하고 개인화된 영화 취향 분석</p>
+                    </div>
+                    <div class="feature-item fade-in">
+                        <span class="feature-icon">🌍</span>
+                        <h3 class="feature-title">Global Cinema</h3>
+                        <p class="feature-description">전 세계 다양한 영화 문화와 트렌드를 한 곳에서 경험</p>
+                    </div>
                 </div>
-                <div class="page-counter fade-in">1/4</div>
-            </aside>
+            </section>
         </main>
 
-        <!-- 푸터 -->
+        <!-- Footer -->
         <footer class="footer">
-            <div class="footer-content fade-in">
-                <h3>문화의 경계를 넘나드는 플랫폼</h3>
-                <p>
-                    YELLOW BULL은 전통과 현대, 동양과 서양의 문화적 경계를 허무는 
-                    새로운 형태의 문화 플랫폼입니다. 깊이 있는 대화와 혁신적인 기술이 만나는 곳.
+            <div class="footer-content">
+                <div class="footer-logo fade-in">CINE'MO</div>
+                <p class="footer-description fade-in">
+                    Casa Cinema가 선사하는 프리미엄 영화 문화 플랫폼.
+                    영화를 사랑하는 모든 이들을 위한 특별한 공간입니다.
                 </p>
+                <div class="footer-links fade-in">
+                    <a href="#" class="footer-link">About</a>
+                    <a href="#" class="footer-link">Services</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">Privacy</a>
+                    <a href="#" class="footer-link">Terms</a>
+                </div>
+                <div class="footer-copyright fade-in">
+                    © 2025 주식회사 까사씨네마(Casa Cinema). All rights reserved.
+                </div>
             </div>
         </footer>
     </div>
 
     <script>
-        // 페이드인 애니메이션
-        function initAnimations() {
+        // Smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.animationDelay = '0.2s';
-                        entry.target.classList.add('fade-in');
-                        observer.unobserve(entry.target);
+                        entry.target.classList.add('visible');
                     }
                 });
-            }, { threshold: 0.1 });
+            }, observerOptions);
 
+            // Observe all fade-in elements
             document.querySelectorAll('.fade-in').forEach(el => {
                 observer.observe(el);
             });
-        }
 
-        // 스크롤 시차 효과
-        function handleParallax() {
-            let ticking = false;
-            
-            function updateParallax() {
-                const scrolled = window.pageYOffset;
-                const heroSection = document.querySelector('.hero-section');
-                const decorativePattern = document.querySelector('.decorative-pattern');
-                
-                if (heroSection) {
-                    heroSection.style.transform = `translateY(${scrolled * 0.3}px)`;
-                }
-                
-                if (decorativePattern) {
-                    decorativePattern.style.transform = `translateY(${scrolled * 0.5}px)`;
-                }
-                
-                ticking = false;
-            }
-            
-            function requestTick() {
-                if (!ticking) {
-                    requestAnimationFrame(updateParallax);
-                    ticking = true;
-                }
-            }
-            
-            window.addEventListener('scroll', requestTick, { passive: true });
-        }
-
-        // 메뉴 버튼 기능
-        function initMenu() {
-            const menuBtn = document.querySelector('.menu-btn');
-            menuBtn.addEventListener('click', function() {
-                alert('메뉴 기능은 곧 구현됩니다!');
-            });
-        }
-
-        // 터치 및 마우스 이벤트
-        function initInteractions() {
-            // 서비스 카드 터치 효과
+            // Add ripple effect to service cards
             document.querySelectorAll('.service-card').forEach(card => {
-                card.addEventListener('touchstart', function() {
-                    this.style.transform = 'translateY(-5px) scale(0.98)';
-                }, { passive: true });
-                
-                card.addEventListener('touchend', function() {
-                    this.style.transform = 'translateY(-10px) scale(1)';
-                }, { passive: true });
-            });
-
-            // 콜라주 아이템 클릭 효과
-            document.querySelectorAll('.collage-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    this.style.animation = 'float 0.6s ease';
+                card.addEventListener('click', function(e) {
+                    const ripple = document.createElement('div');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s ease-out;
+                        pointer-events: none;
+                        z-index: 1;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
                     setTimeout(() => {
-                        this.style.animation = '';
+                        ripple.remove();
                     }, 600);
                 });
             });
-        }
 
-        // 초기화
-        window.addEventListener('load', function() {
-            initAnimations();
-            handleParallax();
-            initMenu();
-            initInteractions();
-            
-            // 로고 애니메이션
-            const logo = document.querySelector('.logo');
-            logo.style.opacity = '0';
-            logo.style.transform = 'translateY(-20px)';
-            
-            setTimeout(() => {
-                logo.style.transition = 'all 1s ease';
-                logo.style.opacity = '1';
-                logo.style.transform = 'translateY(0)';
-            }, 500);
+            // Haptic feedback for touch devices
+            if ('vibrate' in navigator) {
+                document.querySelectorAll('.service-card, .menu-btn').forEach(element => {
+                    element.addEventListener('touchstart', () => {
+                        navigator.vibrate(10);
+                    });
+                });
+            }
         });
 
-        // 디바이스 방향 변경 대응
-        window.addEventListener('orientationchange', function() {
+        // Navigation function
+        function navigateToPage(url) {
+            // Add subtle transition effect
+            document.body.style.opacity = '0.95';
             setTimeout(() => {
-                location.reload();
-            }, 100);
+                window.location.href = url;
+            }, 150);
+        }
+
+        // Add ripple animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = scrolled * 0.5;
+            
+            document.querySelectorAll('.floating-element').forEach((element, index) => {
+                const speed = 0.2 + (index * 0.1);
+                element.style.transform = `translateY(${parallax * speed}px)`;
+            });
+        });
+
+        // Performance optimization
+        let ticking = false;
+        function updateAnimations() {
+            // Update any scroll-based animations here
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateAnimations);
+                ticking = true;
+            }
         });
     </script>
 </body>

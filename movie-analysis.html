@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>MOVIE TASTE ANALYZER - YELLOW BULL</title>
+    <title>Movie Taste Analyzer - CINE'MO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -11,20 +15,26 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            --accent-color: #667eea;
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
         }
 
         body {
-            font-family: 'Times New Roman', serif;
-            background: linear-gradient(135deg, #8B1538 0%, #A0522D 20%, #8B4513 60%, #654321 100%);
-            color: #F5F5DC;
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-gradient);
+            color: var(--text-primary);
             overflow-x: hidden;
-            position: relative;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             min-height: 100vh;
+            position: relative;
         }
 
         body::before {
@@ -35,26 +45,37 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 20%, rgba(245, 222, 179, 0.03) 1px, transparent 1px),
-                radial-gradient(circle at 80% 80%, rgba(139, 21, 56, 0.05) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: grain 15s steps(8) infinite;
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
             pointer-events: none;
-            z-index: 1;
-            will-change: transform;
+            z-index: -1;
         }
 
-        @keyframes grain {
-            0%, 100% { transform: translate(0, 0); }
-            10% { transform: translate(-5%, -5%); }
-            20% { transform: translate(-10%, 5%); }
-            30% { transform: translate(5%, -10%); }
-            40% { transform: translate(-5%, 15%); }
-            50% { transform: translate(-10%, 5%); }
-            60% { transform: translate(15%, 0%); }
-            70% { transform: translate(0%, 10%); }
-            80% { transform: translate(-15%, 0%); }
-            90% { transform: translate(10%, 5%); }
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .container {
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--primary-gradient);
+            z-index: 1001;
+            transition: width 0.3s ease;
         }
 
         /* Header */
@@ -63,897 +84,668 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(26, 10, 10, 0.95);
-            padding: 25px 40px;
             z-index: 1000;
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(245, 222, 179, 0.1);
-            transition: all 0.3s ease;
-            will-change: transform;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 20px 0;
+            margin-top: 3px;
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         .logo {
-            font-size: 1.6rem;
-            font-weight: 300;
-            color: #F5DEB3;
-            letter-spacing: 4px;
-            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
         }
 
         .back-btn {
-            color: #F5DEB3;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 300;
-            letter-spacing: 2px;
+            font-weight: 500;
             transition: all 0.3s ease;
-            padding: 10px 20px;
-            border: 1px solid rgba(245, 222, 179, 0.3);
-            background: rgba(245, 222, 179, 0.05);
-            touch-action: manipulation;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-size: 14px;
         }
 
-        .back-btn:active {
-            color: #FFF;
-            background: rgba(245, 222, 179, 0.15);
-            transform: translateY(1px);
+        .back-btn:hover {
+            background: var(--glass-border);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
         /* Main Content */
-        .container {
+        .main-content {
             padding-top: 120px;
             min-height: 100vh;
-            padding-bottom: 80px;
-            position: relative;
-            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 40px;
+            padding-right: 40px;
         }
 
+        /* Title Section */
         .title-section {
             text-align: center;
-            padding: 80px 40px;
-            background: rgba(139, 21, 56, 0.1);
             margin-bottom: 60px;
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .description {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Instructions */
+        .instructions {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .instructions h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .instructions p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .selection-counter {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Movie Grid */
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .movie-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease-out 0.5s forwards;
+            overflow: hidden;
+            box-shadow: var(--glass-shadow);
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .title-section::before {
+        .movie-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            border: 1px solid rgba(245, 222, 179, 0.1);
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 18px;
+        }
+
+        .movie-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .movie-card.selected {
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+        }
+
+        .movie-card.selected::before {
+            opacity: 0.15;
+        }
+
+        .movie-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .movie-poster {
+            width: 120px;
+            height: 180px;
+            background: var(--secondary-gradient);
+            border-radius: 12px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .movie-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .movie-director {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .movie-year {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .movie-card.selected .checkmark {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Analyze Button */
+        .analyze-section {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .analyze-btn {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 18px 48px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            opacity: 0.5;
             pointer-events: none;
         }
 
-        .title-section h1 {
-            font-size: 4.5rem;
-            color: #F5DEB3;
-            margin-bottom: 30px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
-            letter-spacing: 6px;
-            font-weight: 300;
-            line-height: 0.9;
-            will-change: transform;
+        .analyze-btn.active {
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        .title-section p {
-            font-size: 1.3rem;
-            color: rgba(245, 245, 220, 0.9);
-            font-weight: 300;
-            letter-spacing: 2px;
-            line-height: 1.6;
+        .analyze-btn.active:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
 
-        /* Movie Selection Grid */
-        .selection-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .instruction {
+        /* Footer */
+        .footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 40px;
             text-align: center;
-            margin-bottom: 60px;
-            padding: 50px 40px;
-            background: rgba(139, 21, 56, 0.15);
-            border-radius: 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(245, 222, 179, 0.1);
+            margin-top: 80px;
+        }
+
+        .brand-footer {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Animations */
+        .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform, opacity;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .instruction.visible {
+        .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .instruction h2 {
-            color: #F5DEB3;
-            font-size: 3rem;
-            margin-bottom: 25px;
-            font-weight: 300;
-            letter-spacing: 3px;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
-        .instruction p {
-            font-size: 1.2rem;
-            color: rgba(245, 245, 220, 0.9);
-            line-height: 1.7;
-            font-weight: 300;
-            letter-spacing: 1px;
+        .shake {
+            animation: shake 0.5s ease-in-out;
         }
 
-        .movies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .movie-card {
-            background: rgba(245, 222, 179, 0.08);
-            border-radius: 0;
-            padding: 25px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid rgba(245, 222, 179, 0.2);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            transform: translateY(50px) scale(0.9);
-            will-change: transform, opacity;
-            touch-action: manipulation;
-        }
-
-        .movie-card.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .movie-card:active {
-            transform: translateY(-3px) scale(0.98);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-        }
-
-        .movie-card.selected {
-            border-color: #8B1538;
-            background: linear-gradient(135deg, rgba(139, 21, 56, 0.4), rgba(93, 15, 32, 0.3));
-            color: #F5F5DC;
-            transform: translateY(-5px) scale(1.02);
-        }
-
-        .movie-card.selected::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #F5DEB3, transparent);
-            animation: shimmer 2s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(100%); }
-        }
-
-        .movie-card.selected .movie-title,
-        .movie-card.selected .movie-info {
-            color: #F5DEB3;
-        }
-
-        .movie-poster {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, #2D0710, #5D0F20);
-            border-radius: 0;
-            margin-bottom: 20px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            border: 1px solid rgba(245, 222, 179, 0.1);
-            transition: all 0.4s ease;
-            will-change: transform;
-        }
-
-        .movie-card:active .movie-poster {
-            transform: scale(1.05);
-        }
-
-        .movie-poster::after {
-            content: '🎬';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3rem;
-            opacity: 0.3;
-            filter: sepia(100%) saturate(150%) hue-rotate(350deg);
-            transition: all 0.4s ease;
-        }
-
-        .movie-card:active .movie-poster::after {
-            transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
-            opacity: 0.5;
-        }
-
-        .movie-title {
-            font-size: 1.4rem;
-            font-weight: 300;
-            margin-bottom: 15px;
-            color: #F5DEB3;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-
-        .movie-info {
-            font-size: 0.9rem;
-            color: rgba(245, 245, 220, 0.8);
-            line-height: 1.6;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        .selection-counter {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background: linear-gradient(135deg, #8B1538, #5D0F20);
-            color: #F5DEB3;
-            padding: 25px 35px;
-            border-radius: 0;
-            font-size: 1.1rem;
-            font-weight: 300;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            z-index: 100;
-            border: 1px solid rgba(245, 222, 179, 0.2);
-            backdrop-filter: blur(10px);
-            letter-spacing: 1px;
-            transition: all 0.4s ease;
-            will-change: transform;
-        }
-
-        .selection-counter.pulse {
-            animation: counterPulse 0.6s ease;
-        }
-
-        @keyframes counterPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .analyze-btn {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #8B1538, #5D0F20);
-            color: #F5DEB3;
-            border: 1px solid rgba(245, 222, 179, 0.3);
-            padding: 25px 50px;
-            font-size: 1.2rem;
-            font-weight: 300;
-            border-radius: 0;
-            cursor: pointer;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            backdrop-filter: blur(10px);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-family: 'Times New Roman', serif;
-            touch-action: manipulation;
-            will-change: transform, opacity;
-        }
-
-        .analyze-btn.visible {
-            opacity: 1;
-            pointer-events: all;
-            animation: btnEntrance 0.8s ease;
-        }
-
-        @keyframes btnEntrance {
-            0% {
-                transform: translateX(-50%) translateY(100px) scale(0.8);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(-50%) translateY(0) scale(1);
-                opacity: 1;
-            }
-        }
-
-        .analyze-btn:active {
-            background: linear-gradient(135deg, #A0522D, #8B1538);
-            transform: translateX(-50%) translateY(2px) scale(0.98);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-        }
-
-        /* Ripple Effect */
-        .ripple {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ripple::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(245, 222, 179, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-            z-index: 0;
-        }
-
-        .ripple:active::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: rgba(139, 21, 56, 0.2);
-            z-index: 1001;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #F5DEB3, #8B1538);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* Responsive */
+        /* Mobile Optimization */
         @media (max-width: 768px) {
-            .header {
-                padding: 20px 20px;
-            }
-
-            .logo {
-                font-size: 1.3rem;
-                letter-spacing: 2px;
-            }
-
-            .back-btn {
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
-
-            .container {
-                padding-top: 100px;
-            }
-
-            .title-section {
-                padding: 60px 20px;
-                margin-bottom: 40px;
-            }
-
-            .title-section h1 {
-                font-size: 3rem;
-                letter-spacing: 3px;
-                margin-bottom: 25px;
-            }
-
-            .title-section p {
-                font-size: 1.1rem;
-                letter-spacing: 1px;
-            }
-
-            .selection-container {
+            .nav {
                 padding: 0 20px;
             }
 
-            .instruction {
-                padding: 40px 30px;
-                margin-bottom: 40px;
+            .main-content {
+                padding: 120px 20px 0;
             }
 
-            .instruction h2 {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-                margin-bottom: 20px;
-            }
-
-            .instruction p {
-                font-size: 1rem;
-            }
-            
-            .movies-grid {
-                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-                gap: 20px;
-                margin-bottom: 60px;
-            }
-            
-            .movie-card {
-                padding: 20px 15px;
-            }
-
-            .movie-poster {
-                height: 180px;
-                margin-bottom: 15px;
-            }
-
-            .movie-title {
-                font-size: 1.2rem;
-                margin-bottom: 12px;
-            }
-
-            .movie-info {
-                font-size: 0.8rem;
-            }
-            
-            .selection-counter {
-                bottom: 120px;
-                right: 20px;
-                padding: 20px 25px;
-                font-size: 1rem;
-            }
-            
-            .analyze-btn {
-                bottom: 30px;
-                padding: 20px 35px;
-                font-size: 1rem;
-                letter-spacing: 1px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .title-section h1 {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-            }
-
-            .title-section p {
-                font-size: 1rem;
-                letter-spacing: 1px;
-            }
-
-            .instruction {
+            .instructions {
                 padding: 30px 20px;
             }
 
-            .instruction h2 {
-                font-size: 1.8rem;
-                letter-spacing: 1px;
-            }
-
-            .instruction p {
-                font-size: 0.9rem;
-            }
-
             .movies-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 15px;
-            }
-
-            .movie-card {
-                padding: 15px 10px;
-            }
-
-            .movie-poster {
-                height: 160px;
-                margin-bottom: 12px;
-            }
-
-            .movie-title {
-                font-size: 1.1rem;
-                margin-bottom: 10px;
-            }
-
-            .movie-info {
-                font-size: 0.75rem;
-            }
-
-            .selection-counter {
-                bottom: 110px;
-                right: 15px;
-                padding: 18px 22px;
-                font-size: 0.9rem;
-            }
-
-            .analyze-btn {
-                bottom: 20px;
-                padding: 18px 30px;
-                font-size: 0.9rem;
-                letter-spacing: 1px;
-            }
-        }
-
-        /* 가로 모드 최적화 */
-        @media (max-width: 896px) and (orientation: landscape) {
-            .title-section {
-                padding: 40px 20px;
-            }
-
-            .title-section h1 {
-                font-size: 2.5rem;
-                margin-bottom: 20px;
-            }
-
-            .movies-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 20px;
             }
 
+            .movie-card {
+                padding: 25px 15px;
+            }
+
             .movie-poster {
-                height: 140px;
+                width: 100px;
+                height: 150px;
+                font-size: 40px;
             }
 
-            .selection-counter {
-                bottom: 80px;
-                right: 20px;
-            }
-
-            .analyze-btn {
-                bottom: 20px;
-                padding: 15px 30px;
-                font-size: 0.9rem;
+            .footer {
+                padding: 30px 20px;
             }
         }
 
-        /* 터치 디바이스 최적화 */
         @media (hover: none) and (pointer: coarse) {
+            .movie-card:hover::before {
+                opacity: 0;
+            }
+            
             .movie-card:hover {
                 transform: none;
-                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            }
-
-            .analyze-btn:hover {
-                background: linear-gradient(135deg, #8B1538, #5D0F20);
-                transform: translateX(-50%);
+                box-shadow: var(--glass-shadow);
             }
         }
     </style>
 </head>
 <body>
-    <!-- Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">YELLOW BULL</div>
-            <a href="index.html" class="back-btn">← BACK TO MAIN</a>
-        </nav>
-    </header>
-
-    <!-- Main Container -->
     <div class="container">
-        <!-- Title Section -->
-        <section class="title-section">
-            <h1>MOVIE TASTE<br>ANALYZER</h1>
-            <p>당신의 영화 취향을 분석하고 맞춤 추천을 받아보세요</p>
-        </section>
+        <!-- Progress Bar -->
+        <div class="progress-bar" id="progressBar"></div>
 
-        <!-- Selection Container -->
-        <div class="selection-container">
-            <!-- Instruction -->
-            <div class="instruction">
-                <h2>영화 선택</h2>
-                <p>아래 10개의 영화 중에서 <strong>3-4개</strong>를 선택해주세요.<br>
-                선택한 영화를 바탕으로 당신의 취향을 분석해드립니다.</p>
-            </div>
+        <!-- Header -->
+        <header class="header">
+            <nav class="nav">
+                <div class="logo">CINE'MO</div>
+                <a href="index.html" class="back-btn">← BACK TO MAIN</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Title Section -->
+            <section class="title-section fade-in">
+                <h1 class="main-title">Movie Taste Analyzer</h1>
+                <p class="subtitle">당신만의 영화 DNA를 발견하세요</p>
+                <p class="description">
+                    AI 기반 분석으로 개인 맞춤형 영화 추천을 받아보세요. 
+                    선택한 영화들을 통해 당신의 숨겨진 취향을 알아보겠습니다.
+                </p>
+            </section>
+
+            <!-- Instructions -->
+            <section class="instructions fade-in">
+                <h3>분석 방법</h3>
+                <p>아래 영화 목록에서 <strong>3-4편</strong>을 선택해주세요.</p>
+                <p>선택한 영화들을 바탕으로 당신의 영화 취향을 분석해드립니다.</p>
+                <div class="selection-counter" id="counter">선택됨: 0/4</div>
+            </section>
 
             <!-- Movies Grid -->
-            <div class="movies-grid">
-                <div class="movie-card ripple" data-movie="parasite">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #2C2C2C, #1A1A1A);"></div>
-                    <div class="movie-title">기생충</div>
-                    <div class="movie-info">
-                        감독: 봉준호<br>
-                        연도: 2019<br>
-                        장르: 스릴러, 드라마
+            <section class="movies-grid">
+                <div class="movie-card fade-in" data-movie="inception">
+                    <div class="movie-content">
+                        <div class="movie-poster">🌀</div>
+                        <h3 class="movie-title">인셉션</h3>
+                        <p class="movie-director">크리스토퍼 놀란</p>
+                        <p class="movie-year">2010</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
 
-                <div class="movie-card ripple" data-movie="oldboy">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #8B0000, #5D0F20);"></div>
-                    <div class="movie-title">올드보이</div>
-                    <div class="movie-info">
-                        감독: 박찬욱<br>
-                        연도: 2003<br>
-                        장르: 미스터리, 스릴러
+                <div class="movie-card fade-in" data-movie="parasite">
+                    <div class="movie-content">
+                        <div class="movie-poster">🪜</div>
+                        <h3 class="movie-title">기생충</h3>
+                        <p class="movie-director">봉준호</p>
+                        <p class="movie-year">2019</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
 
-                <div class="movie-card ripple" data-movie="burning">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #FF6B35, #D2691E);"></div>
-                    <div class="movie-title">버닝</div>
-                    <div class="movie-info">
-                        감독: 이창동<br>
-                        연도: 2018<br>
-                        장르: 미스터리, 드라마
+                <div class="movie-card fade-in" data-movie="lalaland">
+                    <div class="movie-content">
+                        <div class="movie-poster">🎭</div>
+                        <h3 class="movie-title">라라랜드</h3>
+                        <p class="movie-director">데미언 차젤</p>
+                        <p class="movie-year">2016</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
 
-                <div class="movie-card ripple" data-movie="decision">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #4A90E2, #2E5C8A);"></div>
-                    <div class="movie-title">헤어질 결심</div>
-                    <div class="movie-info">
-                        감독: 박찬욱<br>
-                        연도: 2022<br>
-                        장르: 로맨스, 미스터리
+                <div class="movie-card fade-in" data-movie="spirited">
+                    <div class="movie-content">
+                        <div class="movie-poster">🐉</div>
+                        <h3 class="movie-title">센과 치히로의 행방불명</h3>
+                        <p class="movie-director">미야자키 하야오</p>
+                        <p class="movie-year">2001</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
 
-                <div class="movie-card ripple" data-movie="minari">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #7ED321, #5A9F1A);"></div>
-                    <div class="movie-title">미나리</div>
-                    <div class="movie-info">
-                        감독: 정이삭<br>
-                        연도: 2020<br>
-                        장르: 드라마
+                <div class="movie-card fade-in" data-movie="joker">
+                    <div class="movie-content">
+                        <div class="movie-poster">🃏</div>
+                        <h3 class="movie-title">조커</h3>
+                        <p class="movie-director">토드 필립스</p>
+                        <p class="movie-year">2019</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
 
-                <div class="movie-card ripple" data-movie="poetry">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #BD10E0, #8B0A9F);"></div>
-                    <div class="movie-title">시</div>
-                    <div class="movie-info">
-                        감독: 이창동<br>
-                        연도: 2010<br>
-                        장르: 드라마
+                <div class="movie-card fade-in" data-movie="interstellar">
+                    <div class="movie-content">
+                        <div class="movie-poster">🌌</div>
+                        <h3 class="movie-title">인터스텔라</h3>
+                        <p class="movie-director">크리스토퍼 놀란</p>
+                        <p class="movie-year">2014</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
 
-                <div class="movie-card ripple" data-movie="train">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #F5A623, #D2941A);"></div>
-                    <div class="movie-title">부산행</div>
-                    <div class="movie-info">
-                        감독: 연상호<br>
-                        연도: 2016<br>
-                        장르: 액션, 스릴러
+                <div class="movie-card fade-in" data-movie="oldboy">
+                    <div class="movie-content">
+                        <div class="movie-poster">🔨</div>
+                        <h3 class="movie-title">올드보이</h3>
+                        <p class="movie-director">박찬욱</p>
+                        <p class="movie-year">2003</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
 
-                <div class="movie-card ripple" data-movie="okja">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #50E3C2, #3AB89A);"></div>
-                    <div class="movie-title">옥자</div>
-                    <div class="movie-info">
-                        감독: 봉준호<br>
-                        연도: 2017<br>
-                        장르: 모험, 드라마
+                <div class="movie-card fade-in" data-movie="amelie">
+                    <div class="movie-content">
+                        <div class="movie-poster">🌸</div>
+                        <h3 class="movie-title">아멜리에</h3>
+                        <p class="movie-director">장-피에르 주네</p>
+                        <p class="movie-year">2001</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
 
-                <div class="movie-card ripple" data-movie="whispering">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #D0021B, #8B1538);"></div>
-                    <div class="movie-title">아가씨</div>
-                    <div class="movie-info">
-                        감독: 박찬욱<br>
-                        연도: 2016<br>
-                        장르: 드라마, 로맨스
+                <div class="movie-card fade-in" data-movie="pulpfiction">
+                    <div class="movie-content">
+                        <div class="movie-poster">💼</div>
+                        <h3 class="movie-title">펄프 픽션</h3>
+                        <p class="movie-director">쿠엔틴 타란티노</p>
+                        <p class="movie-year">1994</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
 
-                <div class="movie-card ripple" data-movie="memories">
-                    <div class="movie-poster" style="background: linear-gradient(135deg, #9013FE, #6A0DAD);"></div>
-                    <div class="movie-title">살인의 추억</div>
-                    <div class="movie-info">
-                        감독: 봉준호<br>
-                        연도: 2003<br>
-                        장르: 범죄, 드라마
+                <div class="movie-card fade-in" data-movie="matrix">
+                    <div class="movie-content">
+                        <div class="movie-poster">💊</div>
+                        <h3 class="movie-title">매트릭스</h3>
+                        <p class="movie-director">워쇼스키 자매</p>
+                        <p class="movie-year">1999</p>
+                        <div class="checkmark">✓</div>
                     </div>
                 </div>
+            </section>
+
+            <!-- Analyze Button -->
+            <section class="analyze-section">
+                <button class="analyze-btn" id="analyzeBtn">취향 분석하기</button>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="brand-footer fade-in">
+                © 2025 주식회사 까사씨네마(Casa Cinema). All rights reserved.
             </div>
-        </div>
+        </footer>
     </div>
-
-    <!-- Selection Counter -->
-    <div class="selection-counter" id="selectionCounter">
-        선택됨: <span id="count">0</span>/4
-    </div>
-
-    <!-- Analyze Button -->
-    <button class="analyze-btn ripple" id="analyzeBtn">취향 분석하기</button>
 
     <script>
-        let selectedMovies = [];
+        let selectedMovies = new Set();
         const maxSelection = 4;
         const minSelection = 3;
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Movie selection logic
+            document.querySelectorAll('.movie-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const movieId = this.dataset.movie;
                     
-                    // Haptic feedback (mobile)
-                    if (navigator.vibrate && window.innerWidth <= 768) {
-                        navigator.vibrate(30);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Animate movie cards on scroll
-        function animateMovieCards() {
-            const cards = document.querySelectorAll('.movie-card');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('visible');
-                }, index * 100);
-            });
-        }
-
-        // Movie selection logic
-        document.querySelectorAll('.movie-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const movieId = this.dataset.movie;
-                
-                // Haptic feedback
-                if (navigator.vibrate) {
-                    navigator.vibrate(50);
-                }
-                
-                if (this.classList.contains('selected')) {
-                    // Deselect
-                    this.classList.remove('selected');
-                    selectedMovies = selectedMovies.filter(id => id !== movieId);
-                } else {
-                    // Select (if not at max)
-                    if (selectedMovies.length < maxSelection) {
-                        this.classList.add('selected');
-                        selectedMovies.push(movieId);
-                        
-                        // Add selection animation
-                        this.style.animation = 'none';
-                        setTimeout(() => {
-                            this.style.animation = '';
-                        }, 10);
+                    if (selectedMovies.has(movieId)) {
+                        // Deselect movie
+                        selectedMovies.delete(movieId);
+                        this.classList.remove('selected');
                     } else {
-                        // Max selection reached - shake animation
-                        this.style.animation = 'shake 0.5s ease-in-out';
-                        setTimeout(() => {
-                            this.style.animation = '';
-                        }, 500);
+                        // Check if max selection reached
+                        if (selectedMovies.size >= maxSelection) {
+                            // Shake animation
+                            this.classList.add('shake');
+                            setTimeout(() => {
+                                this.classList.remove('shake');
+                            }, 500);
+                            
+                            // Haptic feedback
+                            if ('vibrate' in navigator) {
+                                navigator.vibrate([100, 50, 100]);
+                            }
+                            return;
+                        }
+                        
+                        // Select movie
+                        selectedMovies.add(movieId);
+                        this.classList.add('selected');
                     }
-                }
+                    
+                    updateUI();
+                    
+                    // Haptic feedback for selection
+                    if ('vibrate' in navigator) {
+                        navigator.vibrate(50);
+                    }
+                });
+            });
+
+            // Touch event handling for better mobile experience
+            document.querySelectorAll('.movie-card').forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.style.transform = 'translateY(-4px) scale(0.98)';
+                }, { passive: true });
                 
-                updateCounter();
-                toggleAnalyzeButton();
-                updateProgress();
+                card.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        if (!this.classList.contains('selected')) {
+                            this.style.transform = '';
+                        }
+                    }, 100);
+                }, { passive: true });
+            });
+
+            // Analyze button click
+            document.getElementById('analyzeBtn').addEventListener('click', function() {
+                if (selectedMovies.size >= minSelection) {
+                    // Haptic feedback
+                    if ('vibrate' in navigator) {
+                        navigator.vibrate(100);
+                    }
+                    
+                    // Button animation
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        showAnalysisResult();
+                    }, 150);
+                }
             });
         });
 
-        // Shake animation for max selection
-        const shakeKeyframes = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-                20%, 40%, 60%, 80% { transform: translateX(5px); }
-            }
-        `;
-        const style = document.createElement('style');
-        style.textContent = shakeKeyframes;
-        document.head.appendChild(style);
-
-        function updateCounter() {
-            const counter = document.getElementById('selectionCounter');
-            const count = document.getElementById('count');
+        function updateUI() {
+            // Update counter
+            const counter = document.getElementById('counter');
+            counter.textContent = `선택됨: ${selectedMovies.size}/4`;
             
-            count.textContent = selectedMovies.length;
-            
-            // Pulse animation
-            counter.classList.add('pulse');
-            setTimeout(() => {
-                counter.classList.remove('pulse');
-            }, 600);
-        }
-
-        function toggleAnalyzeButton() {
-            const analyzeBtn = document.getElementById('analyzeBtn');
-            if (selectedMovies.length >= minSelection) {
-                analyzeBtn.classList.add('visible');
-            } else {
-                analyzeBtn.classList.remove('visible');
-            }
-        }
-
-        function updateProgress() {
+            // Update progress bar
             const progressBar = document.getElementById('progressBar');
-            const progress = (selectedMovies.length / maxSelection) * 100;
+            const progress = (selectedMovies.size / maxSelection) * 100;
             progressBar.style.width = `${progress}%`;
+            
+            // Update analyze button
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            if (selectedMovies.size >= minSelection) {
+                analyzeBtn.classList.add('active');
+            } else {
+                analyzeBtn.classList.remove('active');
+            }
         }
 
-        // Analyze button click
-        document.getElementById('analyzeBtn').addEventListener('click', function() {
-            if (selectedMovies.length >= minSelection) {
-                // Haptic feedback
-                if (navigator.vibrate) {
-                    navigator.vibrate([100, 50, 100]);
-                }
-                
-                // Loading animation
-                this.textContent = '분석 중...';
-                this.style.pointerEvents = 'none';
-                
-                setTimeout(() => {
-                    alert(`선택된 영화: ${selectedMovies.join(', ')}\n\n분석 결과 페이지로 이동합니다!`);
-                    this.textContent = '취향 분석하기';
-                    this.style.pointerEvents = 'all';
-                }, 2000);
-            }
-        });
-
-        // Scroll-based parallax
-        let ticking = false;
-        
-        function updateParallax() {
-            const scrolled = window.pageYOffset;
-            const titleSection = document.querySelector('.title-section');
-            const header = document.querySelector('.header');
+        function showAnalysisResult() {
+            const selectedMoviesList = Array.from(selectedMovies);
             
-            if (titleSection) {
-                const rate = Math.min(scrolled * 0.3, 50);
-                titleSection.style.transform = `translateY(${rate}px)`;
-                titleSection.style.filter = `brightness(${1 - rate * 0.002})`;
+            // Create analysis result based on selected movies
+            let analysisText = "🎬 분석 결과:\n\n";
+            
+            if (selectedMoviesList.includes('inception') || selectedMoviesList.includes('interstellar')) {
+                analysisText += "• 복잡한 서사구조와 철학적 주제를 좋아하는 성향\n";
             }
             
-            // Header background opacity
-            if (header) {
-                const opacity = Math.min(scrolled / 100, 0.98);
-                header.style.background = `rgba(26, 10, 10, ${opacity})`;
+            if (selectedMoviesList.includes('parasite') || selectedMoviesList.includes('oldboy')) {
+                analysisText += "• 사회비판적 메시지가 담긴 영화를 선호\n";
             }
             
-            ticking = false;
+            if (selectedMoviesList.includes('lalaland') || selectedMoviesList.includes('amelie')) {
+                analysisText += "• 감성적이고 로맨틱한 스토리를 즐기는 타입\n";
+            }
+            
+            if (selectedMoviesList.includes('spirited')) {
+                analysisText += "• 상상력이 풍부하고 환상적인 세계를 좋아함\n";
+            }
+            
+            analysisText += "\n🎯 추천 영화 장르: ";
+            
+            if (selectedMovies.size === 3) {
+                analysisText += "드라마, 스릴러";
+            } else {
+                analysisText += "SF, 판타지, 드라마";
+            }
+            
+            alert(analysisText);
         }
-        
-        function requestTick() {
-            if (!ticking) {
-                requestAnimationFrame(updateParallax);
-                ticking = true;
-            }
-        }
-        
-        window.addEventListener('scroll', requestTick, { passive: true });
 
-        // Touch-based interactions
+        // Scroll momentum for touch devices
         let touchStartY = 0;
         let touchStartTime = 0;
 
@@ -973,95 +765,27 @@
                 const velocity = Math.abs(deltaY) / deltaTime;
                 
                 if (velocity > 0.5) {
-                    // Scroll momentum effect
-                    const cards = document.querySelectorAll('.movie-card');
-                    cards.forEach((card, index) => {
-                        setTimeout(() => {
-                            card.style.transform = `translateY(${deltaY > 0 ? -3 : 3}px)`;
-                            setTimeout(() => {
-                                card.style.transform = '';
-                            }, 200);
-                        }, index * 20);
-                    });
+                    // Add momentum effect
+                    document.body.style.transform = `translateY(${deltaY > 0 ? -2 : 2}px)`;
+                    setTimeout(() => {
+                        document.body.style.transform = '';
+                    }, 200);
                 }
             }
         }, { passive: true });
 
-        // Device orientation change
-        window.addEventListener('orientationchange', function() {
-            setTimeout(() => {
-                // Recalculate layout
-                window.scrollTo(0, window.pageYOffset + 1);
-                window.scrollTo(0, window.pageYOffset - 1);
-            }, 100);
-        });
-
-        // Initialize animations
-        window.addEventListener('load', function() {
-            // Header fade in
-            const header = document.querySelector('.header');
-            header.style.opacity = '0';
-            header.style.transform = 'translateY(-20px)';
-            
-            setTimeout(() => {
-                header.style.transition = 'all 0.6s ease';
-                header.style.opacity = '1';
-                header.style.transform = 'translateY(0)';
-            }, 300);
-            
-            // Animate instruction
-            setTimeout(() => {
-                document.querySelector('.instruction').classList.add('visible');
-            }, 800);
-            
-            // Animate movie cards
-            setTimeout(() => {
-                animateMovieCards();
-            }, 1200);
-            
-            // Performance optimization
-            document.body.style.willChange = 'auto';
-        });
-
-        // Performance optimization: will-change management
-        const performanceObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.willChange = 'transform, opacity';
-                } else {
-                    entry.target.style.willChange = 'auto';
-                }
-            });
-        });
-
-        document.querySelectorAll('.movie-card').forEach(card => {
-            performanceObserver.observe(card);
-        });
-
-        // Mouse events (desktop)
-        if (window.matchMedia("(hover: hover)").matches) {
-            document.querySelectorAll('.movie-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    if (!this.classList.contains('selected')) {
-                        this.style.transform = 'translateY(-8px) scale(1.02)';
-                        this.style.boxShadow = '0 15px 40px rgba(0,0,0,0.25)';
-                        this.style.borderColor = 'rgba(245, 222, 179, 0.4)';
-                    }
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    if (!this.classList.contains('selected')) {
-                        this.style.transform = '';
-                        this.style.boxShadow = '';
-                        this.style.borderColor = '';
-                    }
-                });
-            });
+        // Performance optimization
+        let ticking = false;
+        function updateAnimations() {
+            // Update any scroll-based animations here
+            ticking = false;
         }
 
-        // Observe elements for animations
-        document.querySelectorAll('.instruction').forEach(el => {
-            observer.observe(el);
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateAnimations);
+                ticking = true;
+            }
         });
     </script>
 </body>
